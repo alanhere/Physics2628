@@ -87,6 +87,26 @@ window.HUB_DATA = {
       "example": true
     },
     {
+      "id": "lesson-2026-10-16-diverging-lens-ray-diagram",
+      "date": "2026-10-16",
+      "topic": "Waves and Light",
+      "title": "Diverging lens ray diagram",
+      "summary": "Feedback on Critical angle investigation.\nDraw the ray diagram for a diverging lens. Unlike convex lens there is only one diagram.",
+      "intentions": [
+        "Draw the ray diagrams for a diverging lens."
+      ],
+      "activities": [],
+      "homework": "Use the individual feedback to improve your experimental report on critical angle. Look at the sample report I gave you as an exemplar on how to write a report. Concentrate on using PEER to write a proper conclusion.\nIn the activity book, do questions 3 and 4 on diverging lens Page 80.\nDo the convex lens questions.",
+      "due": "2026-10-19",
+      "additionalInstructions": "",
+      "resources": [
+        "lesson-2026-10-16-diverging-lens-ray-diagram-resource-1",
+        "lesson-2026-10-16-diverging-lens-ray-diagram-resource-2",
+        "lesson-2026-10-16-diverging-lens-ray-diagram-resource-3"
+      ],
+      "example": false
+    },
+    {
       "id": "lesson-2026-10-16",
       "date": "2026-10-16",
       "topic": "Mechanics",
@@ -303,6 +323,30 @@ window.HUB_DATA = {
       "type": "Video",
       "description": "Attached to Invetigation of the lens formula for a convex lens",
       "url": "https://www.youtube.com/watch?v=AoGDOT6U9pQ&list=PL9E9AC96BBD39720E&index=4"
+    },
+    {
+      "id": "lesson-2026-10-16-diverging-lens-ray-diagram-resource-1",
+      "title": "diverging lens animation.pptx",
+      "topic": "Waves and Light",
+      "type": "File",
+      "description": "Attached to Diverging lens ray diagram",
+      "url": "uploads/lesson-2026-10-16-diverging-lens-ray-diagram-diverging-lens-animation.pptx"
+    },
+    {
+      "id": "lesson-2026-10-16-diverging-lens-ray-diagram-resource-2",
+      "title": "Critical Angle reports Feedback.pptx",
+      "topic": "Waves and Light",
+      "type": "File",
+      "description": "Attached to Diverging lens ray diagram",
+      "url": "uploads/lesson-2026-10-16-diverging-lens-ray-diagram-Critical-Angle-reports-Feedback.pptx"
+    },
+    {
+      "id": "lesson-2026-10-16-diverging-lens-ray-diagram-resource-3",
+      "title": "Lenses Ray Diagram Construction.pdf",
+      "topic": "Waves and Light",
+      "type": "File",
+      "description": "Attached to Diverging lens ray diagram",
+      "url": "uploads/lesson-2026-10-16-diverging-lens-ray-diagram-Lenses-Ray-Diagram-Construction.pdf"
     }
   ],
   "skills": [
