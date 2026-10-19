@@ -103,6 +103,29 @@ window.HUB_DATA = {
         "graph-guide"
       ],
       "example": true
+    },
+    {
+      "id": "lesson-2026-10-13-converging-lenses",
+      "date": "2026-10-13",
+      "topic": "Waves and Light",
+      "title": "Converging Lenses",
+      "summary": "We looked at the 5 step method for solving the critical angle questions.\nDraw ray diagrams for a convex lens with object beyond 2f, at 2f, between 2f and f , at f and inside 2f.\nCharacteistics for the image.\nUtilised the lens formula to investigate different scenarios in detemining f, u and v.",
+      "intentions": [
+        "Today we looked at converging lenses and a) drawing the ray diagrams for the different lens position and b) utilising the lens formula."
+      ],
+      "activities": [],
+      "homework": "From textbook, read pages 188-191. It covers everything we did in class.\n3) From the textbook, Page 194, do questions 1 to 4. \n4) From the activity book, Page 80 do questions 1 and 2. Then draw the other two scenarios ( object at 2f and object between 2f and f)  we did in class in your exercise copy.",
+      "due": "2026-10-16",
+      "additionalInstructions": "Look at the video on how to draw the ray diagrams for the convex lens.",
+      "resources": [
+        "lesson-2026-10-13-converging-lenses-resource-1",
+        "lesson-2026-10-13-converging-lenses-resource-2",
+        "lesson-2026-10-13-converging-lenses-resource-3",
+        "lesson-2026-10-13-converging-lenses-resource-4",
+        "lesson-2026-10-13-converging-lenses-resource-5",
+        "lesson-2026-10-13-converging-lenses-resource-6"
+      ],
+      "example": false
     }
   ],
   "topics": [
@@ -291,6 +314,54 @@ window.HUB_DATA = {
       "type": "File",
       "description": "Attached to Diverging lens ray diagram",
       "url": "uploads/lesson-2026-10-16-diverging-lens-ray-diagram-Lenses-Ray-Diagram-Construction.pdf"
+    },
+    {
+      "id": "lesson-2026-10-13-converging-lenses-resource-1",
+      "title": "Ray diagrams for convex lens",
+      "topic": "Waves and Light",
+      "type": "Video",
+      "description": "Attached to Converging Lenses",
+      "url": "https://www.youtube.com/watch?v=mmU_nxS9Fpc"
+    },
+    {
+      "id": "lesson-2026-10-13-converging-lenses-resource-2",
+      "title": "convex lens solutions.pdf",
+      "topic": "Waves and Light",
+      "type": "File",
+      "description": "Attached to Converging Lenses",
+      "url": "uploads/lesson-2026-10-13-converging-lenses-convex-lens-solutions.pdf"
+    },
+    {
+      "id": "lesson-2026-10-13-converging-lenses-resource-3",
+      "title": "5th Year Critical Angle Questions Worked Solutions.pdf",
+      "topic": "Waves and Light",
+      "type": "File",
+      "description": "Attached to Converging Lenses",
+      "url": "uploads/lesson-2026-10-13-converging-lenses-5th-Year-Critical-Angle-Questions-Worked-Solutions.pdf"
+    },
+    {
+      "id": "lesson-2026-10-13-converging-lenses-resource-4",
+      "title": "Example Questions Convex Lens.docx",
+      "topic": "Waves and Light",
+      "type": "File",
+      "description": "Attached to Converging Lenses",
+      "url": "uploads/lesson-2026-10-13-converging-lenses-Example-Questions-Convex-Lens.docx"
+    },
+    {
+      "id": "lesson-2026-10-13-converging-lenses-resource-5",
+      "title": "Chapter 12 Lenses ray diagrams.pptx",
+      "topic": "Waves and Light",
+      "type": "File",
+      "description": "Attached to Converging Lenses",
+      "url": "uploads/lesson-2026-10-13-converging-lenses-Chapter-12-Lenses-ray-diagrams.pptx"
+    },
+    {
+      "id": "lesson-2026-10-13-converging-lenses-resource-6",
+      "title": "image characteristics .pdf",
+      "topic": "Waves and Light",
+      "type": "File",
+      "description": "Attached to Converging Lenses",
+      "url": "uploads/lesson-2026-10-13-converging-lenses-image-characteristics-.pdf"
     }
   ],
   "skills": [
