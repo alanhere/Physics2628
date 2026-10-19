@@ -177,3 +177,12 @@ html{scroll-padding-top:68px}
   footer{padding:17px 12px;gap:7px;text-align:center}
 }
 @media(max-width:360px){.compact-nav nav a{font-size:1.1rem;padding:6px 9px}.timeline-date{flex-basis:61px;font-size:1.13rem}.timeline-title{font-size:.86rem}.compact-links{grid-template-columns:1fr}}
+
+/* Class Log is the home screen; compact mobile-friendly tabs */
+.compact-nav{min-height:0;padding-top:0;padding-bottom:0}
+.compact-nav nav{justify-content:center;gap:clamp(12px,3vw,34px)}
+.copybook-hero,.compact-links{display:none!important}
+.page-head{margin-top:12px;margin-bottom:10px}
+.page-head h1{margin-bottom:3px}
+.notebook-tabs{margin-top:10px;margin-bottom:15px}
+@media(max-width:700px){.compact-nav{padding:0 8px}.compact-nav nav{justify-content:flex-start;gap:16px}.compact-nav nav a{white-space:nowrap;padding:10px 2px}.page-head{margin-top:8px}.page-head h1{font-size:2.15rem}.page-head p{font-size:.87rem}.notebook-tabs{gap:16px;overflow-x:auto;white-space:nowrap}.toolbar{margin-top:12px}.timeline-lesson summary{min-height:58px}}
