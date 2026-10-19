@@ -345,6 +345,16 @@ window.HUB_DATA = {
       "url": "uploads/resource-standalone-mvfvz8nb-50kjlg-Critical-Angle-Exemplar-Checklist-Numbered.docx",
       "placement": "both",
       "standalone": true
+    },
+    {
+      "id": "standalone-mvfw213g-rravk8",
+      "title": "Check list for writng a Physics report",
+      "description": "the 10 steps to ensure you physics experimental report has all the information that it requires.",
+      "topic": "Scientific Skills",
+      "type": "File",
+      "url": "uploads/resource-standalone-mvfw213g-rravk8-Physics-Report-Writing-Checklist.pdf",
+      "placement": "both",
+      "standalone": true
     }
   ],
   "skills": [
