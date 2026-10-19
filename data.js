@@ -78,33 +78,6 @@ window.HUB_DATA = {
       "example": false
     },
     {
-      "id": "lesson-2026-10-14",
-      "date": "2026-10-14",
-      "topic": "Scientific Skills",
-      "title": "Graphing experimental data",
-      "summary": "Plotted points, chose sensible scales and determined a slope.",
-      "intentions": [
-        "Label graph axes with quantities and units",
-        "Draw a best-fit line",
-        "Calculate slope using a large triangle"
-      ],
-      "activities": [
-        "Plotted a sample dataset",
-        "Discussed anomalous results"
-      ],
-      "homework": "Complete one graph using the supplied dataset.",
-      "due": "2026-10-16",
-      "catchup": [
-        "Read the graphing guide",
-        "Plot the example data on graph paper",
-        "Calculate the slope from two points on your best-fit line"
-      ],
-      "resources": [
-        "graph-guide"
-      ],
-      "example": true
-    },
-    {
       "id": "lesson-2026-10-13-converging-lenses",
       "date": "2026-10-13",
       "topic": "Waves and Light",
