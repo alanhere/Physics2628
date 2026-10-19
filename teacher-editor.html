@@ -148,7 +148,7 @@ async function publishLesson(){
   const tree=await api(base+'/git/trees','POST',{base_tree:head.tree.sha,tree:entries});
   const commit=await api(base+'/git/commits','POST',{message:'Publish physics lesson: '+generated.date+' — '+generated.title,tree:tree.sha,parents:[originalSha]});
   $('status').textContent='Publishing lesson and attachments…';
-  await api(base+refPath,'PATCH',{sha:commit.sha,force:false});
+  await api(base+refPath.replace('/git/ref/','/git/refs/'),'PATCH',{sha:commit.sha,force:false});
   $('status').textContent='✓ Published to GitHub in one commit. GitHub Pages will update shortly. Refresh the editor before publishing another lesson.';
   btn.disabled=true;$('download').disabled=true;$('copy').disabled=true;
   // Clear the credential immediately after successful publishing.
