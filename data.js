@@ -5,6 +5,36 @@ window.HUB_DATA = {
   "teacherNote": "Sample content for demonstration. Your teacher will publish real lesson updates here.",
   "lessons": [
     {
+      "id": "lesson-2026-10-19-invetigation-of-the-lens-formula-for-a-convex",
+      "date": "2026-10-19",
+      "topic": "Waves and Light",
+      "title": "Invetigation of the lens formula for a convex lens",
+      "summary": "Formation of real images by a convex lens.\nRelationship between object distance, image distance and focal length.\nExperimental procedure for verifying the lens formula.\nSources of experimental error and precautions to improve accuracy.",
+      "intentions": [
+        "To investigate and verify the lens formula for a convex (converging) lens: (1/f = 1/u + 1/v).",
+        "To accurately measure object distance ((u)) and image distance ((v)).",
+        "To calculate the focal length of a convex lens using experimental data.",
+        "To analyse results numerically and graphically."
+      ],
+      "activities": [
+        "Set up a convex lens, illuminated object and screen.",
+        "Adjusted the screen to obtain a sharp, focused image.",
+        "Measured (u) and (v) for different object positions.",
+        "Recorded measurements in a results table and calculated focal length.",
+        "Investigated how a graph of (1/v) against (1/u) can be used to determine focal length.",
+        "See attached for more details"
+      ],
+      "homework": "Complete the results table and calculations.\nThe graph and conclusion will be done in class tomorrow.\nExperiment is to be written up for Friday.",
+      "due": "2026-10-20",
+      "additionalInstructions": "If you were absent for the investigation, look at the attached youtube video",
+      "resources": [
+        "lesson-2026-10-19-invetigation-of-the-lens-formula-for-a-convex-resource-1",
+        "lesson-2026-10-19-invetigation-of-the-lens-formula-for-a-convex-resource-2",
+        "lesson-2026-10-19-invetigation-of-the-lens-formula-for-a-convex-resource-3"
+      ],
+      "example": false
+    },
+    {
       "id": "lesson-2026-10-19-diverging-concave-lens-formula",
       "date": "2026-10-19",
       "topic": "Waves and Light",
@@ -249,6 +279,30 @@ window.HUB_DATA = {
       "type": "File",
       "description": "Attached to Diverging (Concave ) lens formula.",
       "url": "uploads/lesson-2026-10-19-diverging-concave-lens-formula-diverging-lens-formula.pdf"
+    },
+    {
+      "id": "lesson-2026-10-19-invetigation-of-the-lens-formula-for-a-convex-resource-1",
+      "title": "Convex Lens Investigation.pdf",
+      "topic": "Waves and Light",
+      "type": "File",
+      "description": "Attached to Invetigation of the lens formula for a convex lens",
+      "url": "uploads/lesson-2026-10-19-invetigation-of-the-lens-formula-for-a-convex-Convex-Lens-Investigation.pdf"
+    },
+    {
+      "id": "lesson-2026-10-19-invetigation-of-the-lens-formula-for-a-convex-resource-2",
+      "title": "verify lens formula.pptx",
+      "topic": "Waves and Light",
+      "type": "File",
+      "description": "Attached to Invetigation of the lens formula for a convex lens",
+      "url": "uploads/lesson-2026-10-19-invetigation-of-the-lens-formula-for-a-convex-verify-lens-formula.pptx"
+    },
+    {
+      "id": "lesson-2026-10-19-invetigation-of-the-lens-formula-for-a-convex-resource-3",
+      "title": "Video of inestigation for lens formula",
+      "topic": "Waves and Light",
+      "type": "Video",
+      "description": "Attached to Invetigation of the lens formula for a convex lens",
+      "url": "https://www.youtube.com/watch?v=AoGDOT6U9pQ&list=PL9E9AC96BBD39720E&index=4"
     }
   ],
   "skills": [
