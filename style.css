@@ -86,36 +86,45 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,su
 
 #limitation-builder{margin-top:24px}#limitation-builder select{width:100%;max-width:100%;padding:11px;border:1px solid #a6b2ca;border-radius:8px;background:white;font:inherit;color:#202b42}#limitation-result{white-space:pre-wrap;line-height:1.6}
 
-/* Warm and playful student-facing notebook refresh */
-:root{--ink:#184b63;--pen:#ee5d48;--paper:#fffdf8;--gridline:#e4eee9;--rule:#b2cec7;--sans:'Trebuchet MS',Verdana,system-ui,sans-serif;color:#253746}
-body{background-color:#fffdf8;background-image:linear-gradient(#e4eee9 1px,transparent 1px),linear-gradient(90deg,#e4eee9 1px,transparent 1px);background-size:32px 32px}
-.topbar{background:#fffefa;border-bottom:3px solid #184b63;box-shadow:0 4px 0 #e2ede8;padding-top:12px;padding-bottom:12px}
-.brand strong{color:#184b63;font-size:2rem}.logo{color:#ee5d48;transform:rotate(-10deg)}
-nav a{color:#24536a;font-size:1.24rem}nav a:hover,nav a.active{color:#d94c3d;border-bottom-color:#ee5d48}
-.container{max-width:1130px}
-.compact-intro{background:#fff3db;border:2px solid #184b63;border-left:9px solid #ee5d48;border-radius:17px 8px 17px 8px;box-shadow:6px 6px 0 #b8d8d0;padding:26px 30px;transform:rotate(-.15deg)}
-.compact-kicker{color:#ad463a;font-size:.76rem}
-.compact-intro h1{font-family:var(--hand);font-size:clamp(2.15rem,4.2vw,3.4rem);font-weight:500;letter-spacing:0;color:#164b65;line-height:1.06;margin:7px 0}
-.compact-intro p{font-size:1.02rem;color:#3e5360}
-.compact-log-link{font-family:var(--hand);font-size:1.35rem;color:#164b65}
-.section-head h2,.compact-section h2,.page-head h1{font-family:var(--hand);font-size:clamp(1.65rem,3vw,2.25rem);font-weight:500;letter-spacing:0;color:#164b65}
-.card,.resource-card,.skill-module,.skills-activity{border:2px solid #a9c9c3;border-radius:15px 8px 16px 9px;background:#fffefa;box-shadow:3px 4px 0 #e2ebe5}
-.card:hover,.tile:hover,.skill-module:hover{border-color:#3b8e87}
-.card h3,.compact-latest .card h3{font-family:var(--hand);font-size:1.7rem;color:#18536b;font-weight:500}
-.compact-latest .card{padding:23px 25px}.compact-latest .card h3{font-size:1.85rem}
-.homework{background:#eaf5ee;border-left:5px solid #ee5d48;border-radius:3px 12px 12px 3px}
-.compact-links{gap:13px}
-.compact-links a{background:#fff4dc;border:2px solid #a9c9c3;border-radius:12px 5px 13px 6px;box-shadow:3px 3px 0 #d8e8df;color:#174e65;padding:19px}
-.compact-links a:nth-child(2){background:#e8f5f1}.compact-links a:nth-child(3){background:#fceae4}.compact-links a:nth-child(4){background:#e9effb}
-.compact-links a:hover{background:#fff;border-color:#ee5d48;transform:translateY(-2px)}
-.compact-links strong{font-family:var(--hand);font-size:1.45rem;font-weight:500}
-.compact-links span{font-size:.82rem;color:#47606b}
-.btn,.btn.outline,.linklist a{border-color:#18536b;color:#18536b;border-radius:9px 5px 10px 6px}
-.btn:hover,.linklist a:hover{background:#e7f4ef}
-.lesson-meta{color:#526978}.pill{border-color:#e66c5c;color:#bb493a}
-footer{background:#e9f3ed;border-top:3px solid #18536b}
-.skills-header h1,.skills-activity h2,.skills-resources h2{font-family:var(--hand);font-weight:500;color:#18536b}
-.skills-header h1{font-size:2.7rem}.skills-activity h2{font-size:1.9rem}
-.skill-glyph{background:#fff0d7;color:#19536b}
-.peer-builder{border-color:#18536b;background:#fffefa}
-@media(max-width:750px){.compact-intro{transform:none;padding:21px 19px}.compact-intro h1{font-size:2.5rem}.compact-links strong{font-size:1.25rem}}
+/* Definitive copybook visual system: blue ink, red rules, quiet squared paper. */
+:root{--ink:#203fa1;--pen:#e31f36;--paper:#fdfefe;--gridline:#e0eaf5;--rule:#c9d8e8;--sans:'Lexend',system-ui,sans-serif}
+body{background-color:#fdfefe;background-image:linear-gradient(#e0eaf5 1px,transparent 1px),linear-gradient(90deg,#e0eaf5 1px,transparent 1px);background-size:36px 36px;color:#26334a}
+.topbar{background:#fdfefeeb;border-bottom:2px solid #c6d6e7;box-shadow:none;padding-top:12px;padding-bottom:12px}
+.brand strong{font-family:var(--hand);font-size:1.9rem;color:var(--ink);font-weight:400}.brand small{font-size:.68rem}.logo{color:var(--pen);background:transparent}
+nav a{font-family:var(--hand);font-size:1.33rem;color:var(--ink);font-weight:400;border-radius:0;border-bottom:3px solid transparent}nav a:hover,nav a.active{background:transparent;border-bottom-color:var(--pen);color:var(--ink)}
+.container{max-width:960px;padding-top:30px}
+.copybook-hero{max-width:800px;margin:12px auto 30px;padding:8px 0 5px}
+.copybook-kicker{font-size:.72rem;color:#a23b46;letter-spacing:.12em;font-weight:700}
+.copybook-hero h1,.page-head h1{font-family:var(--hand);font-size:clamp(3rem,6vw,4.7rem);font-weight:400;line-height:1.12;color:var(--ink);margin:8px 0 16px;display:table;text-decoration:underline;text-decoration-color:var(--pen);text-decoration-thickness:3px;text-underline-offset:10px}
+.copybook-hero p,.page-head p{font-size:1rem;color:#596579;max-width:660px}
+.notebook-tabs{display:flex;flex-wrap:wrap;gap:22px;margin:28px 0 18px;align-items:center}
+.notebook-tabs a{font-family:var(--hand);font-size:1.7rem;color:#596579;text-decoration:none;padding:3px 0 7px;border-bottom:4px solid transparent}
+.notebook-tabs a:hover,.notebook-tabs a.selected{color:var(--ink);border-bottom-color:var(--pen)}
+.page-head{margin:5px 0 10px}.page-head h1{margin-bottom:13px}
+.section-head{border-bottom:2px solid var(--rule);margin-top:28px}.section-head h2{font-family:var(--hand);font-size:2.1rem;font-weight:400;color:var(--ink)}
+.section-head>a{font-family:var(--hand);font-size:1.3rem;color:var(--ink)}
+.card,.accordion,.resource-card{background:#fefefe;border:2px solid var(--ink);border-radius:9px;padding:21px;box-shadow:none}
+.card h3{font-family:var(--hand);font-size:1.75rem;color:var(--ink);font-weight:400}.card p{color:#4c5870}
+.compact-latest .card{padding:23px 25px}.compact-latest .card h3{font-size:1.9rem}
+.homework{background:#f6f8fb;border-left:3px solid var(--pen);border-radius:0;padding:12px 15px}
+.compact-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.compact-links a{display:flex;flex-direction:column;gap:4px;padding:16px 19px;border:2px solid var(--ink);border-radius:8px;background:#fefefe;text-decoration:none;color:var(--ink)}
+.compact-links a:hover{background:#edf4ff}.compact-links strong{font-family:var(--hand);font-size:1.6rem;font-weight:400}.compact-links span{font-size:.85rem;color:#5a6679}
+.toolbar{margin:15px 0 26px}.toolbar input,.toolbar select{border:2px solid #aebfd6;border-radius:6px;background:#fff;padding:11px}
+.timeline{border-left:2px solid var(--pen);margin:16px 0 0 14px;padding:0 0 5px 35px}
+.timeline-month{position:relative;font-family:var(--hand);font-size:1.85rem;font-weight:400;color:#586476;margin:4px 0 15px}
+.timeline-month::before{content:'';position:absolute;left:-43px;top:0;width:14px;height:26px;background:#fdfefe}
+.timeline-lesson{position:relative;margin:0 0 15px;background:#fff;border:2px solid var(--ink);border-radius:9px;overflow:visible}
+.timeline-lesson::before{content:'';position:absolute;left:-47px;top:22px;width:14px;height:14px;border:2px solid var(--pen);border-radius:50%;background:#fff}
+.timeline-lesson summary{display:flex;align-items:center;gap:14px;list-style:none;cursor:pointer;padding:16px 19px;min-height:68px}
+.timeline-lesson summary::-webkit-details-marker{display:none}
+.timeline-date{font-family:var(--hand);font-size:1.65rem;color:var(--ink);white-space:nowrap;line-height:1.1}
+.timeline-title{font-weight:650;color:#253047;font-size:.95rem;flex:1;line-height:1.4}
+.timeline-chevron{font-family:var(--hand);font-size:2.3rem;color:var(--ink);line-height:.7;transition:transform .15s}
+.timeline-lesson[open] .timeline-chevron{transform:rotate(180deg)}
+.timeline-body{border-top:1px dashed var(--rule);padding:0 14px 14px}.timeline-body .card{border:0;padding:12px 4px 4px}.timeline-body .card h3{font-size:1.6rem}
+.linklist a,.btn,.btn.outline{background:#fff;color:var(--ink);border:2px solid var(--ink);border-radius:6px;text-decoration:none}
+.pill{background:#fff;color:var(--pen);border:2px solid var(--pen);border-radius:50%;font-family:var(--hand);font-weight:400}
+footer{background:#fdfefe;border-top:2px solid #bfcfe3;color:#5b677b}footer strong{color:var(--ink)}
+.skills-header h1,.skills-activity h2,.skills-resources h2{font-family:var(--hand);color:var(--ink);font-weight:400}
+@media(max-width:650px){.copybook-hero h1,.page-head h1{font-size:3.2rem}.notebook-tabs{gap:12px 18px}.notebook-tabs a{font-size:1.4rem}.timeline{margin-left:8px;padding-left:22px}.timeline-lesson::before{left:-34px}.timeline-month::before{left:-30px}.timeline-lesson summary{padding:12px;gap:9px}.timeline-date{font-size:1.3rem}.timeline-title{font-size:.85rem}.compact-links{grid-template-columns:1fr}}
