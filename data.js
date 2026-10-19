@@ -58,35 +58,6 @@ window.HUB_DATA = {
       "example": false
     },
     {
-      "id": "lesson-2026-10-19",
-      "date": "2026-10-19",
-      "topic": "Mechanics",
-      "title": "Speed, velocity and acceleration",
-      "summary": "Distinguished scalar and vector quantities, interpreted motion graphs and calculated acceleration.",
-      "intentions": [
-        "Distinguish speed from velocity",
-        "Calculate acceleration using a = (v − u) / t",
-        "Interpret a velocity–time graph"
-      ],
-      "activities": [
-        "Discussed everyday examples of velocity",
-        "Worked through two acceleration calculations",
-        "Sketched velocity–time graphs"
-      ],
-      "homework": "Complete the sample acceleration worksheet questions 1–5.",
-      "due": "2026-10-22",
-      "catchup": [
-        "Read the motion notes in the topic library",
-        "Try the two worked acceleration examples",
-        "Complete the assigned questions and check any difficulties with your teacher"
-      ],
-      "resources": [
-        "motion-notes",
-        "acceleration-video"
-      ],
-      "example": true
-    },
-    {
       "id": "lesson-2026-10-16-diverging-lens-ray-diagram",
       "date": "2026-10-16",
       "topic": "Waves and Light",
