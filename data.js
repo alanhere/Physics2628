@@ -337,16 +337,6 @@ window.HUB_DATA = {
       "url": "uploads/lesson-2026-10-13-converging-lenses-image-characteristics-.pdf"
     },
     {
-      "id": "standalone-mvfvz8nb-50kjlg",
-      "title": "Ememplate for critical Angle",
-      "description": "A complete end to end investigation report on the crtical angle formula and the index of refraction of glass going from the AIM to a complete conclusion using the PEER framework",
-      "topic": "Waves and Light",
-      "type": "File",
-      "url": "uploads/resource-standalone-mvfvz8nb-50kjlg-Critical-Angle-Exemplar-Checklist-Numbered.docx",
-      "placement": "both",
-      "standalone": true
-    },
-    {
       "id": "standalone-mvfw213g-rravk8",
       "title": "Check list for writng a Physics report",
       "description": "the 10 steps to ensure you physics experimental report has all the information that it requires.",
@@ -363,6 +353,16 @@ window.HUB_DATA = {
       "topic": "Waves and Light",
       "type": "File",
       "url": "uploads/resource-standalone-mvfw41yl-ik8neu-Snells-Law-Glass-Block-Experiment-PEER-Conclusion.docx",
+      "placement": "both",
+      "standalone": true
+    },
+    {
+      "id": "standalone-mvfvz8nb-50kjlg",
+      "title": "Ememplar for Critical Angle investigation report",
+      "description": "A complete end to end investigation report on the crtical angle formula and the index of refraction of glass going from the AIM to a complete conclusion using the PEER framework",
+      "topic": "Waves and Light",
+      "type": "File",
+      "url": "uploads/resource-standalone-mvfvz8nb-50kjlg-Critical-Angle-Exemplar-Checklist-Numbered.docx",
       "placement": "both",
       "standalone": true
     }
