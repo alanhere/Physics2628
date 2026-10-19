@@ -55,7 +55,7 @@
 <div class="field"><label for="gh-token">Fine-grained GitHub personal access token</label><input id="gh-token" type="password" autocomplete="off" placeholder="github_pat_..."><small>Grant access only to this repository, with Repository permissions → Contents: Read and write. Never put this token in a file or commit it. It is not stored by this editor.</small></div>
 <div class="editor-actions"><button type="button" id="publish" disabled>🚀 Publish lesson and attachments</button><button type="button" id="download" class="secondary" disabled>⬇ Download data.js (backup)</button><button type="button" id="copy" class="secondary" disabled>Copy lesson entry</button></div>
 <p id="status" class="status" role="status" aria-live="polite"></p><div id="upload-manifest" class="preview" hidden></div>
-<p><small>Publishing makes one GitHub commit containing the lesson and attachments. GitHub Pages then deploys the site (usually after a short delay). If the repository changed since you opened the editor, publishing stops to prevent overwriting newer lessons; reload the page and try again.</small></p></section>
+<p><small>Publishing makes one GitHub commit containing the lesson and attachments. GitHub Pages then deploys the site (usually after a short delay). The editor fetches the latest lesson data directly from GitHub before every publication, merges your lesson safely, and checks for concurrent updates.</small></p></section>
 </section></div></main>
 <script src="data.js"></script><script>
 (()=>{
@@ -95,7 +95,7 @@ $('lesson-form').addEventListener('submit',e=>{
  const newResources=attachments.map((a,i)=>({id:generated.id+'-resource-'+(i+1),title:a.title,topic:generated.topic,type:a.kind==='link'?(/youtu\.be|youtube\.com|vimeo\.com/i.test(a.url)?'Video':'Link'):a.kind==='image'?'Image':'File',description:'Attached to '+generated.title,url:a.kind==='link'?a.url:'uploads/'+a.filename}));
  generated.resources.push(...newResources.map(r=>r.id));
  updated={...data,topics:data.topics.some(t=>t.name.toLowerCase()===topicName.toLowerCase())?data.topics:[...data.topics,{name:topicName,icon:'◉',color:'sky',description:'Lessons and resources for '+topicName+'.',keyIdeas:[]}],lessons:[generated,...data.lessons.filter(l=>l.id!==generated.id)].sort((a,b)=>b.date.localeCompare(a.date)),resources:[...data.resources.filter(r=>!r.id.startsWith(generated.id+'-resource-')),...newResources]};
- const manifest=$('upload-manifest');const files=attachments.filter(a=>a.file);manifest.hidden=!files.length;manifest.replaceChildren();if(files.length){const strong=document.createElement('strong');strong.textContent='Files to upload to GitHub → uploads/';manifest.append(strong);const list=document.createElement('ul');files.forEach(a=>{const li=document.createElement('li');li.textContent=a.filename;list.append(li)});manifest.append(list);const note=document.createElement('p');note.textContent='Rename each original file to the filename above before uploading. The website links will work only after those files are uploaded.';manifest.append(note);}
+ const manifest=$('upload-manifest');const files=attachments.filter(a=>a.file);manifest.hidden=!files.length;manifest.replaceChildren();if(files.length){const strong=document.createElement('strong');strong.textContent='Files to upload to GitHub → uploads/';manifest.append(strong);const list=document.createElement('ul');files.forEach(a=>{const li=document.createElement('li');li.textContent=a.filename;list.append(li)});manifest.append(list);const note=document.createElement('p');note.textContent='These files upload automatically with Publish. Rename and upload them manually only if using the Download backup method.';manifest.append(note);}
  $('preview').innerHTML=`<small>${escape(date)} · ${escape(generated.topic)}</small><h3>${escape(title)}</h3><p>${escape(generated.summary)}</p><strong>Learning intentions</strong><ul>${generated.intentions.map(x=>`<li>${escape(x)}</li>`).join('')}</ul><strong>Homework</strong><p>${escape(generated.homework)}${due?' — Due '+escape(due):''}</p>${generated.additionalInstructions?`<strong>Additional instructions</strong><p>${escape(generated.additionalInstructions)}</p>`:""}`;
  $('download').disabled=false;$('copy').disabled=false;$('publish').disabled=false;
  $('status').textContent=replacement?'Ready to publish: a lesson with this ID will be replaced.':'Ready to publish: review the preview, then select Publish.';
@@ -109,7 +109,23 @@ $('download').addEventListener('click',()=>{
 });
 // GitHub Git Data API: upload blobs and update the branch in one commit.
 // No token is persisted to localStorage, cookies, files, or the repository.
-const initialDataText=fetch('data.js',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('Cannot load original data.js');return r.text()});
+// Read the repository's authoritative data.js, not a potentially stale GitHub Pages copy.
+const parseHubData=source=>{
+ const match=source.match(/window\.HUB_DATA\s*=\s*([\s\S]*?)\s*;\s*(?:\/\/[\s\S]*)?$/);
+ if(!match)throw new Error('Cannot recognise GitHub data.js format. No changes were made.');
+ let parsed;try{parsed=JSON.parse(match[1]);}catch{throw new Error('GitHub data.js is not valid JSON lesson data. No changes were made.');}
+ if(!parsed||!Array.isArray(parsed.lessons)||!Array.isArray(parsed.resources)||!Array.isArray(parsed.topics))throw new Error('GitHub data.js has an unexpected structure. No changes were made.');
+ return parsed;
+};
+const mergeLesson=latest=>{
+ const existing=latest.lessons.find(l=>l.id===generated.id);
+ // Never silently replace a lesson that was published from another session.
+ if(existing && !data.lessons.some(l=>l.id===generated.id))throw new Error('A lesson with this date and title already exists on GitHub. Check the Class Log before publishing again.');
+ if(existing && JSON.stringify(existing)!==JSON.stringify(data.lessons.find(l=>l.id===generated.id)))throw new Error('This lesson was changed on GitHub after the editor opened. Reload and review before replacing it.');
+ const newResources=attachments.map((a,i)=>({id:generated.id+'-resource-'+(i+1),title:a.title,topic:generated.topic,type:a.kind==='link'?(/youtu\.be|youtube\.com|vimeo\.com/i.test(a.url)?'Video':'Link'):a.kind==='image'?'Image':'File',description:'Attached to '+generated.title,url:a.kind==='link'?a.url:'uploads/'+a.filename}));
+ const topicName=generated.topic;
+ return {...latest,topics:latest.topics.some(t=>t.name.toLowerCase()===topicName.toLowerCase())?latest.topics:[...latest.topics,{name:topicName,icon:'◉',color:'sky',description:'Lessons and resources for '+topicName+'.',keyIdeas:[]}],lessons:[generated,...latest.lessons.filter(l=>l.id!==generated.id)].sort((a,b)=>b.date.localeCompare(a.date)),resources:[...latest.resources.filter(r=>!r.id.startsWith(generated.id+'-resource-')),...newResources]};
+};
 const bytesBase64=bytes=>{let result='';for(let i=0;i<bytes.length;i+=0x8000){result+=String.fromCharCode(...bytes.subarray(i,i+0x8000));}return btoa(result);};
 async function publishLesson(){
  if(!updated||!generated)return;
@@ -127,13 +143,12 @@ async function publishLesson(){
   const base='/repos/'+encodeURIComponent(owner)+'/'+encodeURIComponent(repo);
   const refPath='/git/ref/heads/'+branch.split('/').map(encodeURIComponent).join('/');
   const ref=await api(base+refPath);const originalSha=ref.object.sha;
-  // Compare the repository version with the version the editor loaded.
+  // Read the latest data directly from GitHub and merge without dropping newer lessons.
   const currentFile=await api(base+'/contents/data.js?ref='+encodeURIComponent(branch));
-  const originalData=await initialDataText;
-  const originalBytes=new TextEncoder().encode(originalData);
-  const originalHash=await crypto.subtle.digest('SHA-1',new Uint8Array([...new TextEncoder().encode('blob '+originalBytes.length+'\0'),...originalBytes]));
-  const originalGitSha=[...new Uint8Array(originalHash)].map(b=>b.toString(16).padStart(2,'0')).join('');
-  if(currentFile.sha!==originalGitSha)throw new Error('data.js has changed in GitHub since this editor was loaded. Refresh the editor from the latest published site and regenerate your lesson.');
+  const rawData=await fetch('https://api.github.com'+base+'/contents/data.js?ref='+encodeURIComponent(branch),{headers:{'Accept':'application/vnd.github.raw+json','Authorization':'Bearer '+token,'X-GitHub-Api-Version':'2022-11-28'},cache:'no-store'});
+  if(!rawData.ok)throw new Error('Unable to read current data.js (GitHub '+rawData.status+').');
+  const latestData=parseHubData(await rawData.text());
+  const merged=mergeLesson(latestData);
   const head=await api(base+'/git/commits/'+originalSha);
   const entries=[];
   for(let i=0;i<files.length;i++){
@@ -143,13 +158,19 @@ async function publishLesson(){
    entries.push({path:'uploads/'+a.filename,mode:'100644',type:'blob',sha:blob.sha});
   }
   $('status').textContent='Preparing lesson data…';
-  const lessonBlob=await api(base+'/git/blobs','POST',{content:jsString(updated),encoding:'utf-8'});
+  const lessonBlob=await api(base+'/git/blobs','POST',{content:jsString(merged),encoding:'utf-8'});
   entries.push({path:'data.js',mode:'100644',type:'blob',sha:lessonBlob.sha});
   const tree=await api(base+'/git/trees','POST',{base_tree:head.tree.sha,tree:entries});
   const commit=await api(base+'/git/commits','POST',{message:'Publish physics lesson: '+generated.date+' — '+generated.title,tree:tree.sha,parents:[originalSha]});
   $('status').textContent='Publishing lesson and attachments…';
   await api(base+refPath.replace('/git/ref/','/git/refs/'),'PATCH',{sha:commit.sha,force:false});
-  $('status').textContent='✓ Published to GitHub in one commit. GitHub Pages will update shortly. Refresh the editor before publishing another lesson.';
+  $('status').textContent='✓ Lesson and '+files.length+' attachment(s) published. You can prepare the next lesson without refreshing.';
+  data.lessons=merged.lessons;data.topics=merged.topics;data.resources=merged.resources;
+  $('resources').innerHTML=data.resources.map(r=>`<option value="${escape(r.id)}">${escape(r.title)}</option>`).join('');
+  $('topic').innerHTML='<option value="">Choose a topic</option>'+data.topics.map(t=>`<option value="${escape(t.name)}">${escape(t.name)}</option>`).join('')+'<option value="__new__">+ Add a new topic…</option>';
+  $('lesson-form').reset();$('date').value=new Date().toLocaleDateString('en-CA');$('new-topic-wrap').hidden=true;$('new-topic').required=false;attachments.length=0;renderAttachments();generated=null;updated=null;
+  $('preview').textContent='Lesson published. Complete the fields to prepare your next lesson.';
+  $('upload-manifest').hidden=true;
   btn.disabled=true;$('download').disabled=true;$('copy').disabled=true;
   // Clear the credential immediately after successful publishing.
   $('gh-token').value='';
