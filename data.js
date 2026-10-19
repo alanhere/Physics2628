@@ -355,6 +355,16 @@ window.HUB_DATA = {
       "url": "uploads/resource-standalone-mvfw213g-rravk8-Physics-Report-Writing-Checklist.pdf",
       "placement": "both",
       "standalone": true
+    },
+    {
+      "id": "standalone-mvfw41yl-ik8neu",
+      "title": "Snells law Report",
+      "description": "A complete end to end exemplar on tne Snell's law investigation",
+      "topic": "Waves and Light",
+      "type": "File",
+      "url": "uploads/resource-standalone-mvfw41yl-ik8neu-Snells-Law-Glass-Block-Experiment-PEER-Conclusion.docx",
+      "placement": "both",
+      "standalone": true
     }
   ],
   "skills": [
