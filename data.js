@@ -78,33 +78,6 @@ window.HUB_DATA = {
       "example": false
     },
     {
-      "id": "lesson-2026-10-16",
-      "date": "2026-10-16",
-      "topic": "Mechanics",
-      "title": "Distance, displacement and speed",
-      "summary": "Introduced scalar and vector quantities and calculated average speed.",
-      "intentions": [
-        "Explain distance and displacement",
-        "Calculate average speed",
-        "Convert between m/s and km/h"
-      ],
-      "activities": [
-        "Measured distance travelled in a short activity",
-        "Solved speed calculations"
-      ],
-      "homework": "Review the definitions and complete three speed calculations.",
-      "due": "2026-10-19",
-      "catchup": [
-        "Review the definitions in the motion notes",
-        "Calculate speed = distance / time for three examples",
-        "Ask for the worksheet if you missed class"
-      ],
-      "resources": [
-        "motion-notes"
-      ],
-      "example": true
-    },
-    {
       "id": "lesson-2026-10-14",
       "date": "2026-10-14",
       "topic": "Scientific Skills",
