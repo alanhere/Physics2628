@@ -56,11 +56,19 @@
 <div class="editor-actions"><button type="button" id="publish" disabled>🚀 Publish lesson and attachments</button><button type="button" id="download" class="secondary" disabled>⬇ Download data.js (backup)</button><button type="button" id="copy" class="secondary" disabled>Copy lesson entry</button></div>
 <p id="status" class="status" role="status" aria-live="polite"></p><div id="upload-manifest" class="preview" hidden></div>
 <p><small>Publishing makes one GitHub commit containing the lesson and attachments. GitHub Pages then deploys the site (usually after a short delay). The editor fetches the latest lesson data directly from GitHub before every publication, merges your lesson safely, and checks for concurrent updates.</small></p></section>
-</section></div></main>
+</section></div>
+<section class="editor-panel" style="margin-top:22px" aria-labelledby="manage-heading"><h2 id="manage-heading">Manage published lessons</h2><p>Load the latest lessons directly from GitHub. Select a lesson to edit its details or delete it from the Class Log. Deleting a lesson does not delete uploaded files.</p>
+<div class="editor-actions"><button type="button" id="manage-load">↻ Load published lessons</button></div>
+<div class="field"><label for="manage-filter">Find a lesson</label><input id="manage-filter" placeholder="Search title, date or topic"></div>
+<div id="manage-list" aria-live="polite">Select “Load published lessons” to begin.</div>
+<p id="manage-status" class="status" role="status" aria-live="polite"></p>
+</section></main>
 <script src="data.js"></script><script>
 (()=>{
 'use strict';
 const data=window.HUB_DATA;
+let editingOriginal=null;
+let managedSnapshot=null;
 const $=id=>document.getElementById(id);
 const attachments=[];
 const MAX_BYTES=20*1024*1024;
@@ -81,7 +89,7 @@ let generated=null,updated=null;
 const invalidate=()=>{generated=null;updated=null;$('download').disabled=true;$('copy').disabled=true;$('publish').disabled=true;$('status').textContent='';};
 $('lesson-form').addEventListener('input',invalidate);
 $('lesson-form').addEventListener('change',invalidate);
-$('reset').addEventListener('click',()=>{attachments.length=0;renderAttachments();$('lesson-form').reset();$('date').value=new Date().toLocaleDateString('en-CA');$('new-topic-wrap').hidden=true;$('new-topic').required=false;invalidate();$('preview').textContent='Complete the fields and select “Generate lesson entry” to preview.';});
+$('reset').addEventListener('click',()=>{editingOriginal=null;attachments.length=0;renderAttachments();HTMLFormElement.prototype.reset.call($('lesson-form'));$('date').value=new Date().toLocaleDateString('en-CA');$('new-topic-wrap').hidden=true;$('new-topic').required=false;invalidate();$('preview').textContent='Complete the fields and select “Generate lesson entry” to preview.';});
 $('lesson-form').addEventListener('submit',e=>{
  e.preventDefault();
  if(!$('lesson-form').reportValidity())return;
@@ -92,6 +100,7 @@ $('lesson-form').addEventListener('submit',e=>{
  if(!topicName){$('status').textContent='Choose or enter a topic.';return;}
  generated={id:'lesson-'+date+'-'+(slug(title)||'entry'),date,topic:topicName,title,summary:v('summary'),intentions:lines(v('intentions')),activities:lines(v('activities')),homework:v('homework'),due,additionalInstructions:v('additional-instructions'),resources:[...$('resources').selectedOptions].map(x=>x.value),example:false};
  const replacement=data.lessons.some(l=>l.id===generated.id);
+ if(editingOriginal)generated.id=editingOriginal.id;
  const newResources=attachments.map((a,i)=>({id:generated.id+'-resource-'+(i+1),title:a.title,topic:generated.topic,type:a.kind==='link'?(/youtu\.be|youtube\.com|vimeo\.com/i.test(a.url)?'Video':'Link'):a.kind==='image'?'Image':'File',description:'Attached to '+generated.title,url:a.kind==='link'?a.url:'uploads/'+a.filename}));
  generated.resources.push(...newResources.map(r=>r.id));
  updated={...data,topics:data.topics.some(t=>t.name.toLowerCase()===topicName.toLowerCase())?data.topics:[...data.topics,{name:topicName,icon:'◉',color:'sky',description:'Lessons and resources for '+topicName+'.',keyIdeas:[]}],lessons:[generated,...data.lessons.filter(l=>l.id!==generated.id)].sort((a,b)=>b.date.localeCompare(a.date)),resources:[...data.resources.filter(r=>!r.id.startsWith(generated.id+'-resource-')),...newResources]};
@@ -119,12 +128,13 @@ const parseHubData=source=>{
 };
 const mergeLesson=latest=>{
  const existing=latest.lessons.find(l=>l.id===generated.id);
+ if(editingOriginal){if(!existing||JSON.stringify(existing)!==JSON.stringify(editingOriginal))throw new Error('This lesson changed since it was loaded for editing. Reload it before saving.');}
  // Never silently replace a lesson that was published from another session.
- if(existing && !data.lessons.some(l=>l.id===generated.id))throw new Error('A lesson with this date and title already exists on GitHub. Check the Class Log before publishing again.');
- if(existing && JSON.stringify(existing)!==JSON.stringify(data.lessons.find(l=>l.id===generated.id)))throw new Error('This lesson was changed on GitHub after the editor opened. Reload and review before replacing it.');
+ if(existing && !editingOriginal && !data.lessons.some(l=>l.id===generated.id))throw new Error('A lesson with this date and title already exists on GitHub. Check the Class Log before publishing again.');
+ if(existing && !editingOriginal && JSON.stringify(existing)!==JSON.stringify(data.lessons.find(l=>l.id===generated.id)))throw new Error('This lesson was changed on GitHub after the editor opened. Reload and review before replacing it.');
  const newResources=attachments.map((a,i)=>({id:generated.id+'-resource-'+(i+1),title:a.title,topic:generated.topic,type:a.kind==='link'?(/youtu\.be|youtube\.com|vimeo\.com/i.test(a.url)?'Video':'Link'):a.kind==='image'?'Image':'File',description:'Attached to '+generated.title,url:a.kind==='link'?a.url:'uploads/'+a.filename}));
  const topicName=generated.topic;
- return {...latest,topics:latest.topics.some(t=>t.name.toLowerCase()===topicName.toLowerCase())?latest.topics:[...latest.topics,{name:topicName,icon:'◉',color:'sky',description:'Lessons and resources for '+topicName+'.',keyIdeas:[]}],lessons:[generated,...latest.lessons.filter(l=>l.id!==generated.id)].sort((a,b)=>b.date.localeCompare(a.date)),resources:[...latest.resources.filter(r=>!r.id.startsWith(generated.id+'-resource-')),...newResources]};
+ return {...latest,topics:latest.topics.some(t=>t.name.toLowerCase()===topicName.toLowerCase())?latest.topics:[...latest.topics,{name:topicName,icon:'◉',color:'sky',description:'Lessons and resources for '+topicName+'.',keyIdeas:[]}],lessons:[generated,...latest.lessons.filter(l=>l.id!==generated.id)].sort((a,b)=>b.date.localeCompare(a.date)),resources:[...latest.resources.filter(r=>!newResources.some(n=>n.id===r.id)),...newResources]};
 };
 const bytesBase64=bytes=>{let result='';for(let i=0;i<bytes.length;i+=0x8000){result+=String.fromCharCode(...bytes.subarray(i,i+0x8000));}return btoa(result);};
 async function publishLesson(){
@@ -168,14 +178,96 @@ async function publishLesson(){
   data.lessons=merged.lessons;data.topics=merged.topics;data.resources=merged.resources;
   $('resources').innerHTML=data.resources.map(r=>`<option value="${escape(r.id)}">${escape(r.title)}</option>`).join('');
   $('topic').innerHTML='<option value="">Choose a topic</option>'+data.topics.map(t=>`<option value="${escape(t.name)}">${escape(t.name)}</option>`).join('')+'<option value="__new__">+ Add a new topic…</option>';
-  $('lesson-form').reset();$('date').value=new Date().toLocaleDateString('en-CA');$('new-topic-wrap').hidden=true;$('new-topic').required=false;attachments.length=0;renderAttachments();generated=null;updated=null;
-  $('preview').textContent='Lesson published. Complete the fields to prepare your next lesson.';
+  HTMLFormElement.prototype.reset.call($('lesson-form'));$('date').value=new Date().toLocaleDateString('en-CA');$('new-topic-wrap').hidden=true;$('new-topic').required=false;attachments.length=0;renderAttachments();generated=null;updated=null;editingOriginal=null;
+  $('preview').textContent='Lesson published. Complete the fields to prepare your next lesson.'; managedSnapshot=null;$('manage-list').textContent='Select “Load published lessons” to refresh the list.';
   $('upload-manifest').hidden=true;
   btn.disabled=true;$('download').disabled=true;$('copy').disabled=true;
   // Clear the credential immediately after successful publishing.
   $('gh-token').value='';
  }catch(err){$('status').textContent='Publish unsuccessful: '+err.message+' No new lesson was published. Check the repository and retry or download a backup.';btn.disabled=false;}
 }
+
+// Manage lessons: read the authoritative repository data and make conflict-safe commits.
+const managementCredentials=()=>{
+ const owner=$('gh-owner').value.trim(),repo=$('gh-repo').value.trim(),branch=$('gh-branch').value.trim(),token=$('gh-token').value.trim();
+ if(!/^[\w-]+$/.test(owner)||!/^[\w.-]+$/.test(repo)||!branch||!token)throw new Error('Enter GitHub owner, repository, branch and token in the publishing settings above.');
+ return {base:'/repos/'+encodeURIComponent(owner)+'/'+encodeURIComponent(repo),branch,token};
+};
+const manageApi=async (path,method='GET',body)=>{
+ const {token}=managementCredentials();
+ const response=await fetch('https://api.github.com'+path,{method,headers:{'Accept':'application/vnd.github+json','Authorization':'Bearer '+token,'X-GitHub-Api-Version':'2022-11-28',...(body?{'Content-Type':'application/json'}:{})},...(body?{body:JSON.stringify(body)}:{})});
+ if(!response.ok){let message='';try{message=(await response.json()).message||''}catch{}throw new Error('GitHub '+response.status+': '+message)}
+ return response.json();
+};
+async function fetchManaged(){
+ const {base,branch,token}=managementCredentials();
+ const refPath='/git/ref/heads/'+branch.split('/').map(encodeURIComponent).join('/');
+ const ref=await manageApi(base+refPath);
+ const response=await fetch('https://api.github.com'+base+'/contents/data.js?ref='+encodeURIComponent(branch),{headers:{'Accept':'application/vnd.github.raw+json','Authorization':'Bearer '+token,'X-GitHub-Api-Version':'2022-11-28'},cache:'no-store'});
+ if(!response.ok)throw new Error('Cannot read GitHub data.js ('+response.status+').');
+ return {data:parseHubData(await response.text()),sha:ref.object.sha,base,refPath};
+}
+const managedItems=()=>{
+ const host=$('manage-list');host.replaceChildren();
+ if(!managedSnapshot){host.textContent='Select “Load published lessons” to begin.';return;}
+ const term=$('manage-filter').value.trim().toLowerCase();
+ const matches=[...managedSnapshot.data.lessons].sort((a,b)=>String(b.date).localeCompare(String(a.date))).filter(l=>[l.title,l.topic,l.date].join(' ').toLowerCase().includes(term));
+ if(!matches.length){host.textContent='No matching lessons.';return;}
+ for(const lesson of matches){
+  const line=document.createElement('div');line.style.cssText='border-bottom:1px solid #d6e1f1;padding:12px 0;display:flex;gap:12px;align-items:center;flex-wrap:wrap';
+  const detail=document.createElement('span');detail.style.flex='1 1 300px';
+  const name=document.createElement('strong');name.textContent=lesson.title||'(Untitled)';
+  const meta=document.createElement('small');meta.style.display='block';meta.textContent=(lesson.date||'No date')+' · '+(lesson.topic||'No topic');
+  detail.append(name,meta);
+  const edit=document.createElement('button');edit.type='button';edit.textContent='Edit';edit.className='secondary';
+  edit.addEventListener('click',()=>loadLessonForEdit(lesson));
+  const remove=document.createElement('button');remove.type='button';remove.textContent='Delete';remove.className='secondary';
+  remove.addEventListener('click',()=>deleteManagedLesson(lesson));
+  line.append(detail,edit,remove);host.append(line);
+ }
+};
+$('manage-filter').addEventListener('input',managedItems);
+$('manage-load').addEventListener('click',async()=>{
+ const btn=$('manage-load');btn.disabled=true;$('manage-status').textContent='Loading the latest published lessons…';
+ try{managedSnapshot=await fetchManaged();managedItems();$('manage-status').textContent=managedSnapshot.data.lessons.length+' published lessons loaded from GitHub.';}
+ catch(e){$('manage-status').textContent=e.message;}
+ finally{btn.disabled=false;}
+});
+function loadLessonForEdit(lesson){
+ editingOriginal=structuredClone(lesson);
+ const fields={date:lesson.date,title:lesson.title,intentions:(lesson.intentions||[]).join('\n'),summary:lesson.summary,activities:(lesson.activities||[]).join('\n'),homework:lesson.homework,due:lesson.due,'additional-instructions':lesson.additionalInstructions};
+ for(const [id,value] of Object.entries(fields))$(id).value=value||'';
+ const known=[...$('topic').options].some(o=>o.value===lesson.topic);
+ $('topic').value=known?lesson.topic:'__new__';$('new-topic-wrap').hidden=known;$('new-topic').required=!known;$('new-topic').value=known?'':lesson.topic||'';
+ for(const option of $('resources').options)option.selected=(lesson.resources||[]).includes(option.value);
+ attachments.length=0;renderAttachments();invalidate();
+ $('preview').textContent='Editing '+lesson.title+'. Review the fields and select Generate lesson entry, then Publish. Existing uploaded files remain linked.';
+ $('status').textContent='Editing published lesson. Its original identifier will be preserved.';
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+async function deleteManagedLesson(lesson){
+ if(!confirm('Delete “'+lesson.title+'” ('+lesson.date+') from the Class Log? Uploaded files will remain in GitHub.'))return;
+ const typed=prompt('To confirm permanent removal from the Class Log, type DELETE:');
+ if(typed!=='DELETE'){$('manage-status').textContent='Deletion cancelled.';return;}
+ $('manage-status').textContent='Checking GitHub for changes…';
+ try{
+  const current=await fetchManaged();
+  const existing=current.data.lessons.find(l=>l.id===lesson.id);
+  if(!existing)throw new Error('Lesson is no longer present. Reload the list.');
+  if(JSON.stringify(existing)!==JSON.stringify(lesson))throw new Error('This lesson has changed since you loaded the list. Reload before deleting.');
+  const next={...current.data,lessons:current.data.lessons.filter(l=>l.id!==lesson.id)};
+  // Keep all resources and uploaded files: other lessons may still use them.
+  const head=await manageApi(current.base+'/git/commits/'+current.sha);
+  const blob=await manageApi(current.base+'/git/blobs','POST',{content:jsString(next),encoding:'utf-8'});
+  const tree=await manageApi(current.base+'/git/trees','POST',{base_tree:head.tree.sha,tree:[{path:'data.js',mode:'100644',type:'blob',sha:blob.sha}]});
+  const commit=await manageApi(current.base+'/git/commits','POST',{message:'Remove physics lesson: '+lesson.date+' — '+lesson.title,tree:tree.sha,parents:[current.sha]});
+  await manageApi(current.base+current.refPath.replace('/git/ref/','/git/refs/'),'PATCH',{sha:commit.sha,force:false});
+  managedSnapshot={...current,data:next,sha:commit.sha};managedItems();
+  data.lessons=next.lessons;data.resources=next.resources;data.topics=next.topics;
+  $('manage-status').textContent='✓ Lesson deleted from the Class Log. Uploaded files were retained.';
+ }catch(e){$('manage-status').textContent='Deletion not completed: '+e.message+' Check GitHub before retrying.';}
+}
+
 $('publish').addEventListener('click',publishLesson);
 $('copy').addEventListener('click',async()=>{
  if(!generated)return;
