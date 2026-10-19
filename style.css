@@ -85,3 +85,37 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,su
 .peer-model{border:1px solid #a5b6d8;border-radius:10px;background:#f9fbff;margin:20px 0}.peer-model summary{cursor:pointer;padding:15px;font-weight:750;color:#23469e}.peer-model-content{padding:0 18px 16px;line-height:1.65}.peer-model-content h3{margin:16px 0 4px;color:#23469e}.peer-model-content p{margin:0 0 12px}.peer-model-note{color:#58647c}.peer-equation{white-space:normal;font-family:Georgia,serif;font-style:italic}.peer-blank{letter-spacing:1px}.peer-critical-calc{border-left:3px solid #b62234;background:#fffaf7;padding:15px;margin:20px 0}.peer-critical-calc h3{margin-top:0}.peer-critical-calc button{padding:10px 15px;border:0;border-radius:8px;background:#23469e;color:white;font:inherit;font-weight:700;cursor:pointer}.peer-critical-calc button:disabled{opacity:.45;cursor:not-allowed}
 
 #limitation-builder{margin-top:24px}#limitation-builder select{width:100%;max-width:100%;padding:11px;border:1px solid #a6b2ca;border-radius:8px;background:white;font:inherit;color:#202b42}#limitation-result{white-space:pre-wrap;line-height:1.6}
+
+/* Warm and playful student-facing notebook refresh */
+:root{--ink:#184b63;--pen:#ee5d48;--paper:#fffdf8;--gridline:#e4eee9;--rule:#b2cec7;--sans:'Trebuchet MS',Verdana,system-ui,sans-serif;color:#253746}
+body{background-color:#fffdf8;background-image:linear-gradient(#e4eee9 1px,transparent 1px),linear-gradient(90deg,#e4eee9 1px,transparent 1px);background-size:32px 32px}
+.topbar{background:#fffefa;border-bottom:3px solid #184b63;box-shadow:0 4px 0 #e2ede8;padding-top:12px;padding-bottom:12px}
+.brand strong{color:#184b63;font-size:2rem}.logo{color:#ee5d48;transform:rotate(-10deg)}
+nav a{color:#24536a;font-size:1.24rem}nav a:hover,nav a.active{color:#d94c3d;border-bottom-color:#ee5d48}
+.container{max-width:1130px}
+.compact-intro{background:#fff3db;border:2px solid #184b63;border-left:9px solid #ee5d48;border-radius:17px 8px 17px 8px;box-shadow:6px 6px 0 #b8d8d0;padding:26px 30px;transform:rotate(-.15deg)}
+.compact-kicker{color:#ad463a;font-size:.76rem}
+.compact-intro h1{font-family:var(--hand);font-size:clamp(2.15rem,4.2vw,3.4rem);font-weight:500;letter-spacing:0;color:#164b65;line-height:1.06;margin:7px 0}
+.compact-intro p{font-size:1.02rem;color:#3e5360}
+.compact-log-link{font-family:var(--hand);font-size:1.35rem;color:#164b65}
+.section-head h2,.compact-section h2,.page-head h1{font-family:var(--hand);font-size:clamp(1.65rem,3vw,2.25rem);font-weight:500;letter-spacing:0;color:#164b65}
+.card,.resource-card,.skill-module,.skills-activity{border:2px solid #a9c9c3;border-radius:15px 8px 16px 9px;background:#fffefa;box-shadow:3px 4px 0 #e2ebe5}
+.card:hover,.tile:hover,.skill-module:hover{border-color:#3b8e87}
+.card h3,.compact-latest .card h3{font-family:var(--hand);font-size:1.7rem;color:#18536b;font-weight:500}
+.compact-latest .card{padding:23px 25px}.compact-latest .card h3{font-size:1.85rem}
+.homework{background:#eaf5ee;border-left:5px solid #ee5d48;border-radius:3px 12px 12px 3px}
+.compact-links{gap:13px}
+.compact-links a{background:#fff4dc;border:2px solid #a9c9c3;border-radius:12px 5px 13px 6px;box-shadow:3px 3px 0 #d8e8df;color:#174e65;padding:19px}
+.compact-links a:nth-child(2){background:#e8f5f1}.compact-links a:nth-child(3){background:#fceae4}.compact-links a:nth-child(4){background:#e9effb}
+.compact-links a:hover{background:#fff;border-color:#ee5d48;transform:translateY(-2px)}
+.compact-links strong{font-family:var(--hand);font-size:1.45rem;font-weight:500}
+.compact-links span{font-size:.82rem;color:#47606b}
+.btn,.btn.outline,.linklist a{border-color:#18536b;color:#18536b;border-radius:9px 5px 10px 6px}
+.btn:hover,.linklist a:hover{background:#e7f4ef}
+.lesson-meta{color:#526978}.pill{border-color:#e66c5c;color:#bb493a}
+footer{background:#e9f3ed;border-top:3px solid #18536b}
+.skills-header h1,.skills-activity h2,.skills-resources h2{font-family:var(--hand);font-weight:500;color:#18536b}
+.skills-header h1{font-size:2.7rem}.skills-activity h2{font-size:1.9rem}
+.skill-glyph{background:#fff0d7;color:#19536b}
+.peer-builder{border-color:#18536b;background:#fffefa}
+@media(max-width:750px){.compact-intro{transform:none;padding:21px 19px}.compact-intro h1{font-size:2.5rem}.compact-links strong{font-size:1.25rem}}
