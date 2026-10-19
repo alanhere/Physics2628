@@ -335,6 +335,16 @@ window.HUB_DATA = {
       "type": "File",
       "description": "Attached to Converging Lenses",
       "url": "uploads/lesson-2026-10-13-converging-lenses-image-characteristics-.pdf"
+    },
+    {
+      "id": "standalone-mvfvz8nb-50kjlg",
+      "title": "Ememplate for critical Angle",
+      "description": "A complete end to end investigation report on the crtical angle formula and the index of refraction of glass going from the AIM to a complete conclusion using the PEER framework",
+      "topic": "Waves and Light",
+      "type": "File",
+      "url": "uploads/resource-standalone-mvfvz8nb-50kjlg-Critical-Angle-Exemplar-Checklist-Numbered.docx",
+      "placement": "both",
+      "standalone": true
     }
   ],
   "skills": [
