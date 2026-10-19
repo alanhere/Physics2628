@@ -128,3 +128,52 @@ nav a{font-family:var(--hand);font-size:1.33rem;color:var(--ink);font-weight:400
 footer{background:#fdfefe;border-top:2px solid #bfcfe3;color:#5b677b}footer strong{color:var(--ink)}
 .skills-header h1,.skills-activity h2,.skills-resources h2{font-family:var(--hand);color:var(--ink);font-weight:400}
 @media(max-width:650px){.copybook-hero h1,.page-head h1{font-size:3.2rem}.notebook-tabs{gap:12px 18px}.notebook-tabs a{font-size:1.4rem}.timeline{margin-left:8px;padding-left:22px}.timeline-lesson::before{left:-34px}.timeline-month::before{left:-30px}.timeline-lesson summary{padding:12px;gap:9px}.timeline-date{font-size:1.3rem}.timeline-title{font-size:.85rem}.compact-links{grid-template-columns:1fr}}
+
+/* Minimal navigation: remove duplicate site identity and reclaim vertical space */
+.topbar.compact-nav{padding:3px max(18px,calc((100vw - 960px)/2));min-height:0;justify-content:center;background:rgba(255,255,255,.72);border-bottom:1px solid #cbdbea}
+.compact-nav nav{justify-content:center;gap:12px}
+.compact-nav nav a{padding:4px 9px;font-size:1.28rem}
+@media(max-width:850px){.topbar.compact-nav{justify-content:flex-end;padding:6px 16px}.compact-nav nav{justify-content:flex-start;gap:2px}}
+
+/* Mobile-first copybook layout: compact swipeable navigation and touch targets. */
+html{scroll-padding-top:68px}
+@media(max-width:850px){
+  .topbar.compact-nav{position:sticky;top:0;z-index:30;display:block;padding:0 8px;min-height:0;background:#fdfefe;box-shadow:0 2px 0 #d8e4f0}
+  .compact-nav .menu{display:none}
+  .compact-nav nav,.compact-nav nav.open{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:flex-start;gap:3px;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none;white-space:nowrap;width:100%;padding:2px 4px}
+  .compact-nav nav::-webkit-scrollbar{display:none}
+  .compact-nav nav a{flex:0 0 auto;min-height:44px;display:flex;align-items:center;justify-content:center;padding:6px 11px;font-size:1.2rem;line-height:1.2}
+  .container{width:100%;max-width:100%;padding:15px 14px 38px}
+  .copybook-hero{margin:3px 0 18px;padding:0}
+  .copybook-hero h1,.page-head h1{font-size:clamp(2.3rem,9vw,3.3rem);line-height:1.1;margin:7px 0 14px}
+  .copybook-hero p,.page-head p{font-size:.94rem;line-height:1.5}
+  .notebook-tabs{gap:7px 15px;margin:16px 0 12px}
+  .notebook-tabs a{font-size:1.28rem;min-height:44px;display:inline-flex;align-items:center}
+  .section-head{margin:22px 0 12px;align-items:flex-start}
+  .section-head h2{font-size:1.8rem}
+  .section-head>a{font-size:1.1rem;min-height:44px;display:inline-flex;align-items:center}
+  .toolbar{display:grid;grid-template-columns:1fr;gap:9px;margin:12px 0 17px}
+  .toolbar input,.toolbar select{min-width:0;width:100%;min-height:46px;font-size:16px}
+  .timeline{margin-left:7px;padding-left:18px}
+  .timeline-month{font-size:1.55rem;margin:0 0 10px}
+  .timeline-month::before{left:-26px}
+  .timeline-lesson{margin-bottom:11px;border-width:1.7px}
+  .timeline-lesson::before{left:-29px;top:20px;width:11px;height:11px}
+  .timeline-lesson summary{min-height:62px;gap:9px;padding:11px 10px}
+  .timeline-date{font-size:1.24rem;white-space:normal;flex:0 0 72px}
+  .timeline-title{font-size:.91rem;line-height:1.35;overflow-wrap:anywhere}
+  .timeline-chevron{font-size:1.9rem;flex:0 0 auto}
+  .timeline-body{padding:0 9px 12px}
+  .timeline-body .card{padding:9px 0 0}
+  .card,.resource-card,.skills-activity{padding:15px}
+  .compact-latest .card{padding:16px}
+  .compact-links{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .compact-links a{padding:13px;min-height:90px}
+  .compact-links strong{font-size:1.35rem}
+  .linklist{display:grid;grid-template-columns:1fr;gap:8px}
+  .linklist a,.btn,.btn.outline{min-height:44px;display:inline-flex;align-items:center;overflow-wrap:anywhere;word-break:break-word;padding:10px 12px}
+  .grid,.grid.two,.skills-modules{grid-template-columns:1fr}
+  .skills-activity input,.skills-activity textarea,.peer-field input,.peer-field textarea{font-size:16px}
+  footer{padding:17px 12px;gap:7px;text-align:center}
+}
+@media(max-width:360px){.compact-nav nav a{font-size:1.1rem;padding:6px 9px}.timeline-date{flex-basis:61px;font-size:1.13rem}.timeline-title{font-size:.86rem}.compact-links{grid-template-columns:1fr}}
