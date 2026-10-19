@@ -99,6 +99,38 @@ window.HUB_DATA = {
         "lesson-2026-10-13-converging-lenses-resource-6"
       ],
       "example": false
+    },
+    {
+      "id": "lesson-2026-10-05-refractive-index-between-2-media",
+      "date": "2026-10-05",
+      "topic": "Waves and Light",
+      "title": "Refractive index between 2 media",
+      "summary": "Light was drawn passing between water and glass, with the normal, the angle of incidence (i) and the angle of refraction (r) labelled.\nLight travelling into a denser medium slows down and bends towards the normal. Light travelling into a less dense medium bends away from the normal.\nsin i / sin r = c₁ / c₂, the ratio of the speeds of light in the two media.\nThe refractive index from medium 1 to medium 2 is the ratio of their absolute refractive indices.",
+      "intentions": [
+        "Explain what the refractive index between two media tells us about how light behaves at a boundary.",
+        "Calculate the refractive index from one medium to another using the absolute refractive indices of each.",
+        "Use the value of the refractive index (greater or less than 1) to predict whether light bends towards or away from the normal.",
+        "Relate the bending of light to the optical density of the two media.",
+        "Show that the refractive index in one direction is the reciprocal of the index in the opposite direction."
+      ],
+      "activities": [
+        "Worked example: water to glass (ₐnᵦ notation)",
+        "wng = ng / nw = 1.50 / 1.33 ≈ 1.1",
+        "This is greater than 1, so the light bends towards the normal (less dense to denser",
+        "Worked example: glass to water",
+        "gnw = nw / ng = 1.33 / 1.5 ≈ 0.88",
+        "This is less than 1, so the light bends away from the normal (denser to less dense).",
+        "Reversing the direction",
+        "If wng = 1.15, then gnw = 1 / 1.15 ≈ 0.87.",
+        "The two indices are reciprocals, so gnw = 1 / wng."
+      ],
+      "homework": "Go through solutions and understand where you went wrong in the test.\n In the refraction guided notes, do the your turn questions (pages 3-4)on applying n=c1/c2 and sin i/sin r",
+      "due": "2026-10-06",
+      "additionalInstructions": "",
+      "resources": [
+        "lesson-2026-10-05-refractive-index-between-2-media-resource-1"
+      ],
+      "example": false
     }
   ],
   "topics": [
@@ -365,6 +397,14 @@ window.HUB_DATA = {
       "url": "uploads/resource-standalone-mvfvz8nb-50kjlg-Critical-Angle-Exemplar-Checklist-Numbered.docx",
       "placement": "both",
       "standalone": true
+    },
+    {
+      "id": "lesson-2026-10-05-refractive-index-between-2-media-resource-1",
+      "title": "Refractive index between 2 media.pdf",
+      "topic": "Waves and Light",
+      "type": "File",
+      "description": "Attached to Refractive index between 2 media",
+      "url": "uploads/lesson-2026-10-05-refractive-index-between-2-media-Refractive-index-between-2-media.pdf"
     }
   ],
   "skills": [
