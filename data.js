@@ -101,6 +101,52 @@ window.HUB_DATA = {
       "example": false
     },
     {
+      "id": "lesson-2026-10-09-critcal-angle-investigation",
+      "date": "2026-10-09",
+      "topic": "Waves and Light",
+      "title": "Critcal Angle Investigation",
+      "summary": "The critical angle\n\nLight passing from a denser to a less dense medium bends away from the normal.\nAs the angle of incidence increases, the refracted ray moves closer to the boundary.\nThe critical angle (C) is the angle of incidence at which the angle of refraction is 90°, so the emergent ray travels along the flat face.\nAbove C, all the light is reflected back into the denser medium. This is total internal reflection.\n\n2. Deriving n = 1/sin C\n\nSnell’s law: n sin i = 1 × sin r\nAt the critical angle, i = C and r = 90°, so n sin C = sin 90° = 1.\nTherefore n = 1/sin C, or C = sin⁻¹(1/n).",
+      "intentions": [
+        "Define the critical angle and state the two conditions for total internal reflection.",
+        "Use Snell’s law to show that n = 1/sin C.",
+        "Measure the critical angle of a semicircular glass block accurately.",
+        "Calculate n from my measurements and compare it with the given value using a percentage difference and a range based on the spread in C.",
+        "Explain how each precaution improves the result and identify sources of error.",
+        "Use secondary data to test whether a model holds.",
+        "Write a PEER conclusion."
+      ],
+      "activities": [
+        "Examples",
+        "Predicting C (glass, n = 1.50)",
+        "C = sin⁻¹(1/1.50) = sin⁻¹(0.667) ≈ 41.8°, so 1/sin C should be close to 1.50.",
+        "Range from the spread (sample data)",
+        "If the mean C = 41.5° and the spread = 1.0°:",
+        "Lowest n = 1/sin(42.5°) = 1/0.676 ≈ 1.48",
+        "Highest n = 1/sin(40.5°) = 1/0.649 ≈ 1.54",
+        "The given n = 1.50 lies inside this range, so the data are consistent with n = 1/sin C.",
+        "Secondary data check",
+        "Material\tPublished n\tPublished C (°)\tsin C\t1/sin C\tAgrees?",
+        "Water\t1.33\t48.8\t0.753\t1.33\tYes",
+        "Perspex\t1.49\t42.2\t0.672\t1.49\tYes",
+        "Crown glass\t1.52\t41.1\t0.657\t1.52\tYes",
+        "Diamond\t2.42\t24.4\t0.413\t2.42\tYes",
+        "The pattern also shows that the higher the refractive index, the smaller the critical angle. Diamond’s small critical angle is why light is so easily trapped inside it.",
+        "Precautions",
+        "Narrow ray: gives a sharper line, so the position of the ray is more precise.",
+        "Crosses far apart: a small marking error then makes less difference to the direction of the line.",
+        "Looking straight down: avoids parallax error when marking points.",
+        "Five trials and a mean: reduces the effect of random errors."
+      ],
+      "homework": "A) Write up the critical angle experiment you did this morning in your experimental copy. I will collect it on Monday.\nIt needs to follow exactly the structure of the Snell's law experiement I gave you last week.\n1) Aim and Title\n2) Equipment used\n3) Labelled diagram\n4)Dependent, independent and control variables.\n5) Method\n6) Precautions\n7) Data recorded\n8) No graph in this experiment\n9 Calculations and analysis\n10) Conclusion using PEER, limitations and Improvements.\nI've attached a graphic for this, \nB) To avoid complicating calculations, only do the first two lines of the Analysis section and include it in your report. Don't use the spread.",
+      "due": "",
+      "additionalInstructions": "If you were absent, or need to refresh your memory of the experiment, please see the attached video",
+      "resources": [
+        "lesson-2026-10-09-critcal-angle-investigation-resource-1",
+        "lesson-2026-10-09-critcal-angle-investigation-resource-2"
+      ],
+      "example": false
+    },
+    {
       "id": "lesson-2026-10-05-refractive-index-between-2-media",
       "date": "2026-10-05",
       "topic": "Waves and Light",
@@ -405,6 +451,22 @@ window.HUB_DATA = {
       "type": "File",
       "description": "Attached to Refractive index between 2 media",
       "url": "uploads/lesson-2026-10-05-refractive-index-between-2-media-Refractive-index-between-2-media.pdf"
+    },
+    {
+      "id": "lesson-2026-10-09-critcal-angle-investigation-resource-1",
+      "title": "Exerpiemnt critical angle.pdf",
+      "topic": "Waves and Light",
+      "type": "File",
+      "description": "Attached to Critcal Angle Investigation",
+      "url": "uploads/lesson-2026-10-09-critcal-angle-investigation-Exerpiemnt-critical-angle.pdf"
+    },
+    {
+      "id": "lesson-2026-10-09-critcal-angle-investigation-resource-2",
+      "title": "Critical Angle Investigation",
+      "topic": "Waves and Light",
+      "type": "Video",
+      "description": "Attached to Critcal Angle Investigation",
+      "url": "https://www.youtube.com/watch?v=d7U3k2XtzVU"
     }
   ],
   "skills": [
