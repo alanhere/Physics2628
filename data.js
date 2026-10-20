@@ -55,7 +55,11 @@ window.HUB_DATA = {
         "lesson-2026-10-19-diverging-concave-lens-formula-resource-2",
         "lesson-2026-10-19-diverging-concave-lens-formula-resource-3"
       ],
-      "example": false
+      "example": false,
+      "homeworkSolution": {
+        "url": "solutions/lesson-2026-10-19-diverging-concave-lens-form-1792479603285.pdf",
+        "label": "Solutions diverging lens questions"
+      }
     },
     {
       "id": "lesson-2026-10-16-diverging-lens-ray-diagram",
