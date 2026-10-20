@@ -5,6 +5,26 @@ window.HUB_DATA = {
   "teacherNote": "Sample content for demonstration. Your teacher will publish real lesson updates here.",
   "lessons": [
     {
+      "id": "lesson-2026-10-20-graphing-1-u-versus-1-v",
+      "date": "2026-10-20",
+      "topic": "Waves and Light",
+      "title": "Graphing 1/u versus 1/v",
+      "summary": "Sample graph used to show the plot and values read to determine the focal length for both intercepts. Average f then calculated",
+      "intentions": [
+        "Use the plot of 1/v versus 1/u to determine the focal length of a convex lens"
+      ],
+      "activities": [
+        "Worksheet with completed graph and question to create a graph when provided with secondary data"
+      ],
+      "homework": "Complete the worksheet (all pages).\nWrite up the investigation performed yesterday in your experimental copy using the 10 step method.",
+      "due": "2026-10-23",
+      "additionalInstructions": "",
+      "resources": [
+        "lesson-2026-10-20-graphing-1-u-versus-1-v-resource-1"
+      ],
+      "example": false
+    },
+    {
       "id": "lesson-2026-10-19-invetigation-of-the-lens-formula-for-a-convex",
       "date": "2026-10-19",
       "topic": "Waves and Light",
@@ -527,6 +547,14 @@ window.HUB_DATA = {
       "type": "Video",
       "description": "Attached to Total Internal Reflection",
       "url": "https://www.youtube.com/watch?v=NiCgcUTL9_Q&t=59s"
+    },
+    {
+      "id": "lesson-2026-10-20-graphing-1-u-versus-1-v-resource-1",
+      "title": "Lens example questions.pdf",
+      "topic": "Waves and Light",
+      "type": "File",
+      "description": "Attached to Graphing 1/u versus 1/v",
+      "url": "uploads/lesson-2026-10-20-graphing-1-u-versus-1-v-Lens-example-questions.pdf"
     }
   ],
   "skills": [
