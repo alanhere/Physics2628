@@ -66,6 +66,7 @@
 <section class="editor-panel" style="margin-top:22px" aria-labelledby="solutions-heading">
 <h2 id="solutions-heading">📝 Homework solutions</h2>
 <p>Release solutions for an existing lesson when students are ready. Choose a PDF to upload <strong>at release time</strong>, or paste a YouTube/website link. Nothing is uploaded or published while withheld.</p>
+<div class="editor-actions"><button type="button" id="sol-load" class="secondary">↻ Load lessons for solutions</button></div>
 <div class="field"><label for="sol-lesson">Lesson</label><select id="sol-lesson"><option value="">Load published lessons first…</option></select></div>
 <div class="field"><label for="sol-file">Solution PDF (optional)</label><input id="sol-file" type="file" accept=".pdf,application/pdf"></div>
 <div class="field"><label for="sol-url">Or solution video / website URL</label><input id="sol-url" type="url" placeholder="https://..."></div>
@@ -357,16 +358,19 @@ $('copy').addEventListener('click',async()=>{
  try{await navigator.clipboard.writeText(JSON.stringify(generated,null,2));$('status').textContent='Lesson entry copied.';}
  catch(e){$('status').textContent='Copy unavailable in this browser. Use Download instead.';}
 });
-})();
 
 // Homework solutions: only publish solution bytes and URLs when the teacher explicitly releases them.
-async function solLoadLessons(){
- const current=await fetchManaged();const select=$('sol-lesson'),chosen=select.value;
+function populateSolutionLessons(lessons){
+ const select=$('sol-lesson'),chosen=select.value;
  select.replaceChildren(new Option('Choose a lesson…',''));
- for(const l of [...current.data.lessons].sort((a,b)=>b.date.localeCompare(a.date)))select.add(new Option(l.date+' — '+l.title+(l.homeworkSolution?.url?' ✓ released':''),l.id));
- select.value=chosen;return current;
+ for(const l of [...lessons].sort((a,b)=>String(b.date).localeCompare(String(a.date))))select.add(new Option(l.date+' — '+l.title+(l.homeworkSolution?.url?' ✓ released':''),l.id));
+ if([...select.options].some(o=>o.value===chosen))select.value=chosen;
 }
-$('manage-load').addEventListener('click',()=>{setTimeout(()=>solLoadLessons().catch(e=>{$('sol-status').textContent=e.message}),400)});
+async function solLoadLessons(){
+ const current=await fetchManaged();populateSolutionLessons(current.data.lessons);return current;
+}
+$('sol-load').addEventListener('click',async()=>{const button=$('sol-load');button.disabled=true;$('sol-status').textContent='Loading published lessons from GitHub…';try{const snapshot=await solLoadLessons();$('sol-status').textContent=snapshot.data.lessons.length+' lessons available. Choose the lesson for these solutions.';}catch(e){$('sol-status').textContent='Could not load lessons: '+e.message;}finally{button.disabled=false;}});
+$('manage-load').addEventListener('click',()=>{if(managedSnapshot){populateSolutionLessons(managedSnapshot.data.lessons);}});
 $('sol-lesson').addEventListener('change',async()=>{try{const snap=await solLoadLessons();const l=snap.data.lessons.find(x=>x.id===$('sol-lesson').value);$('sol-status').textContent=l?.homeworkSolution?.url?'Solutions currently released. You can replace or hide them.':'No solutions released for this lesson.';}catch(e){$('sol-status').textContent=e.message;}});
 async function solPublish(hide){
  const id=$('sol-lesson').value,btn=$('sol-release'),status=$('sol-status');if(!id){status.textContent='Choose a lesson first.';return;}
@@ -392,4 +396,5 @@ async function solPublish(hide){
 }
 $('sol-release').addEventListener('click',()=>solPublish(false));
 $('sol-hide').addEventListener('click',()=>solPublish(true));
+})();
 </script></body></html>
