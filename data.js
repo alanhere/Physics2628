@@ -101,6 +101,38 @@ window.HUB_DATA = {
       "example": false
     },
     {
+      "id": "lesson-2026-10-12-total-internal-reflection",
+      "date": "2026-10-12",
+      "topic": "Waves and Light",
+      "title": "Total Internal Reflection",
+      "summary": "T.I.R. in a prism\n\nThe critical angle of glass is about 41.9°.\nLight entering a face at 90° is not refracted.\nInside the glass the angle of incidence is 45°, which is greater than 41.9°, so the light is totally internally reflected.\nLight leaving a face at 90° is also not refracted.\nThis deviates light through 90° (one reflection) or 180° (two reflections).\nApplications of T.I.R. in prisms\n\nCat’s eyes on the road, and bicycle and car reflectors.\nRetro-reflectors:\nA 90° corner prism sends light back the way it came.\nThey work in 3D, and road signs use hundreds or thousands of tiny prisms.\nThey are also used in reflective strips on clothing.\nSeven retro-reflectors sit on the Moon (five from the Apollo missions), allowing precise measurement of the Moon’s position.\nPrism binoculars.\nOptical fibres\n\nA very thin transparent fibre of glass or plastic that carries light by T.I.R.\nInformation travels as pulses of laser light. The angle of incidence is always greater than the critical angle, so the beam stays inside.\nThe core has a high refractive index and the cladding has a lower one.\nT.I.R. happens at the core–cladding boundary.\nThe cladding keeps light in the core even when fibres touch, and it protects the core’s surface.\n“Light pipe” is a misnomer because the glass is solid.\nAdvantages in telecommunications:\nUp to 2,000 calls per fibre.\nLess signal boosting than electrical cables.\nMore secure, because the signal cannot easily be tapped.\nOther uses: a fibre optic lamp and endoscopes (for example, an image of a human foetus).",
+      "intentions": [
+        "Explain total internal reflection (T.I.R.) and state when it happens: light travelling from a denser to a less dense medium, with an angle of incidence greater than the critical angle.",
+        "Explain Snell’s window and why light from outside only reaches a diver through a cone.",
+        "Describe how a right-angled prism uses T.I.R. to turn light through 90° or 180°.",
+        "Give everyday applications of T.I.R. (reflectors, binoculars, optical fibres, endoscopes).",
+        "Explain how an optical fibre works, including the role of the core and the cladding.",
+        "Calculate a critical angle from refractive indices.",
+        "Explain mirages as an effect of changing refractive index in air."
+      ],
+      "activities": [
+        "Prediction: For the 90° and 180° prism diagrams, say what happens at each face.",
+        "Exercise (slide 31): Find the critical angle in an optic fibre core.",
+        "Think about it: Why does the cladding need a lower refractive index than the core?",
+        "Think about it: Does a “little star” actually twinkle?",
+        "Everyday examples: cat’s eyes, bicycle reflectors, binoculars, fibre broadband, endoscopes and mirages."
+      ],
+      "homework": "In activity book, page 78, questions 1 to 3./\n2) In the handout on critical angle questions do all questions except Q4.\n3) Do the mirage question for Friday.",
+      "due": "2026-10-13",
+      "additionalInstructions": "There are two very good videos on the history of fibre optics.",
+      "resources": [
+        "lesson-2026-10-12-total-internal-reflection-resource-1",
+        "lesson-2026-10-12-total-internal-reflection-resource-2",
+        "lesson-2026-10-12-total-internal-reflection-resource-3"
+      ],
+      "example": false
+    },
+    {
       "id": "lesson-2026-10-09-critcal-angle-investigation",
       "date": "2026-10-09",
       "topic": "Waves and Light",
@@ -467,6 +499,30 @@ window.HUB_DATA = {
       "type": "Video",
       "description": "Attached to Critcal Angle Investigation",
       "url": "https://www.youtube.com/watch?v=d7U3k2XtzVU"
+    },
+    {
+      "id": "lesson-2026-10-12-total-internal-reflection-resource-1",
+      "title": "Read Total internal reflection.pptx",
+      "topic": "Waves and Light",
+      "type": "File",
+      "description": "Attached to Total Internal Reflection",
+      "url": "uploads/lesson-2026-10-20-total-internal-reflection-Read-Total-internal-reflection.pptx"
+    },
+    {
+      "id": "lesson-2026-10-12-total-internal-reflection-resource-2",
+      "title": "The scientist who made the internet possible",
+      "topic": "Waves and Light",
+      "type": "Video",
+      "description": "Attached to Total Internal Reflection",
+      "url": "https://www.youtube.com/watch?v=v4ljKF8LLxc&t=142s"
+    },
+    {
+      "id": "lesson-2026-10-12-total-internal-reflection-resource-3",
+      "title": "The history and physics of Fibre optics",
+      "topic": "Waves and Light",
+      "type": "Video",
+      "description": "Attached to Total Internal Reflection",
+      "url": "https://www.youtube.com/watch?v=NiCgcUTL9_Q&t=59s"
     }
   ],
   "skills": [
