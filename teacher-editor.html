@@ -26,7 +26,7 @@
 <section class="editor-head"><h1>✏️ Teacher Lesson Editor</h1><p>Fill in your lesson, attach resources and publish everything to GitHub in one click.</p></section>
 <div class="notice-teacher"><strong>Important:</strong> The editor is publicly viewable, but publishing requires your GitHub authorisation. For security, use a fine-grained token with <strong>Contents: Read and write</strong> permission for this repository only. Your token stays in browser memory and is never saved. For best security, open this editor locally on your own computer, not on a shared device. Do not enter student personal data.</div>
 <div class="editor-grid">
-<section class="editor-panel"><h2>Lesson details</h2>
+<section class="editor-panel" id="lesson-details-panel"><h2>Lesson details</h2><p id="edit-mode-notice" role="status" aria-live="polite" hidden style="background:#eaf2ff;border-left:4px solid #d3242b;padding:12px;font-weight:700"></p>
 <form id="lesson-form">
 <div class="field"><label for="date">Lesson date *</label><input id="date" type="date" required></div>
 <div class="field"><label for="topic">Topic *</label><select id="topic" required></select><div id="new-topic-wrap" hidden style="margin-top:10px"><label for="new-topic">New topic name *</label><input id="new-topic" type="text" maxlength="80" placeholder="e.g. Optics"></div><small>Select an existing topic or choose “+ Add a new topic”.</small></div>
@@ -62,6 +62,17 @@
 <div class="field"><label for="manage-filter">Find a lesson</label><input id="manage-filter" placeholder="Search title, date or topic"></div>
 <div id="manage-list" aria-live="polite">Select “Load published lessons” to begin.</div>
 <p id="manage-status" class="status" role="status" aria-live="polite"></p>
+</section>
+<section class="editor-panel" style="margin-top:22px" aria-labelledby="solutions-heading">
+<h2 id="solutions-heading">📝 Homework solutions</h2>
+<p>Release solutions for an existing lesson when students are ready. Choose a PDF to upload <strong>at release time</strong>, or paste a YouTube/website link. Nothing is uploaded or published while withheld.</p>
+<div class="field"><label for="sol-lesson">Lesson</label><select id="sol-lesson"><option value="">Load published lessons first…</option></select></div>
+<div class="field"><label for="sol-file">Solution PDF (optional)</label><input id="sol-file" type="file" accept=".pdf,application/pdf"></div>
+<div class="field"><label for="sol-url">Or solution video / website URL</label><input id="sol-url" type="url" placeholder="https://..."></div>
+<div class="field"><label for="sol-label">Link label</label><input id="sol-label" value="View homework solutions" maxlength="100"></div>
+<div class="editor-actions"><button id="sol-release" type="button">Release solutions</button><button id="sol-hide" type="button" class="secondary">Hide solutions</button></div>
+<p id="sol-status" class="status" role="status" aria-live="polite"></p>
+<p><small>Important: Hiding removes the link from the site, but does not remove an already uploaded public PDF from GitHub. Previously shared URLs can still work. Do not release confidential material to a public repository.</small></p>
 </section>
 <section class="editor-panel" style="margin-top:22px" aria-labelledby="standalone-heading">
 <h2 id="standalone-heading">Manage standalone resources</h2><p>Add a PDF, YouTube video, PhET simulation or other link without creating a lesson. Resources are published directly to GitHub.</p>
@@ -265,7 +276,9 @@ function loadLessonForEdit(lesson){
  attachments.length=0;renderAttachments();invalidate();
  $('preview').textContent='Editing '+lesson.title+'. Review the fields and select Generate lesson entry, then Publish. Existing uploaded files remain linked.';
  $('status').textContent='Editing published lesson. Its original identifier will be preserved.';
- window.scrollTo({top:0,behavior:'smooth'});
+ const notice=$('edit-mode-notice');notice.hidden=false;notice.textContent='Editing: '+lesson.title+' — update the fields below, then select Generate lesson entry and Publish.';
+ $('lesson-details-panel').scrollIntoView({behavior:'smooth',block:'start'});
+ setTimeout(()=>$('title').focus({preventScroll:true}),350);
 }
 async function deleteManagedLesson(lesson){
  if(!confirm('Delete “'+lesson.title+'” ('+lesson.date+') from the Class Log? Uploaded files will remain in GitHub.'))return;
@@ -345,4 +358,38 @@ $('copy').addEventListener('click',async()=>{
  catch(e){$('status').textContent='Copy unavailable in this browser. Use Download instead.';}
 });
 })();
+
+// Homework solutions: only publish solution bytes and URLs when the teacher explicitly releases them.
+async function solLoadLessons(){
+ const current=await fetchManaged();const select=$('sol-lesson'),chosen=select.value;
+ select.replaceChildren(new Option('Choose a lesson…',''));
+ for(const l of [...current.data.lessons].sort((a,b)=>b.date.localeCompare(a.date)))select.add(new Option(l.date+' — '+l.title+(l.homeworkSolution?.url?' ✓ released':''),l.id));
+ select.value=chosen;return current;
+}
+$('manage-load').addEventListener('click',()=>{setTimeout(()=>solLoadLessons().catch(e=>{$('sol-status').textContent=e.message}),400)});
+$('sol-lesson').addEventListener('change',async()=>{try{const snap=await solLoadLessons();const l=snap.data.lessons.find(x=>x.id===$('sol-lesson').value);$('sol-status').textContent=l?.homeworkSolution?.url?'Solutions currently released. You can replace or hide them.':'No solutions released for this lesson.';}catch(e){$('sol-status').textContent=e.message;}});
+async function solPublish(hide){
+ const id=$('sol-lesson').value,btn=$('sol-release'),status=$('sol-status');if(!id){status.textContent='Choose a lesson first.';return;}
+ const file=$('sol-file').files[0],url=$('sol-url').value.trim();let parsed;
+ if(!hide){if(!file&&!url){status.textContent='Choose a PDF or enter a solution link.';return;}if(file&&(file.type!=='application/pdf'&&!file.name.toLowerCase().endsWith('.pdf')||file.size>20*1024*1024)){status.textContent='Choose a PDF smaller than 20 MB.';return;}if(!file){try{parsed=new URL(url);if(!['http:','https:'].includes(parsed.protocol))throw Error();}catch{status.textContent='Enter a valid http(s) URL.';return;}}}
+ if(hide&&!confirm('Hide the solutions link from students? Previously published PDFs remain publicly accessible by their URL.'))return;
+ btn.disabled=true;$('sol-hide').disabled=true;status.textContent=hide?'Hiding solutions…':'Preparing solutions…';
+ try{
+  const current=await fetchManaged(),lesson=current.data.lessons.find(x=>x.id===id);if(!lesson)throw new Error('Lesson not found. Reload the list.');
+  const head=await manageApi(current.base+'/git/commits/'+current.sha);const tree=[];
+  let finalUrl=parsed?.href||url;
+  if(!hide&&file){const bytes=new Uint8Array(await file.arrayBuffer());const blob=await manageApi(current.base+'/git/blobs','POST',{content:bytesBase64(bytes),encoding:'base64'});const filename='solutions/'+slug(id)+'-'+Date.now()+'.pdf';tree.push({path:filename,mode:'100644',type:'blob',sha:blob.sha});finalUrl=filename;}
+  const next=structuredClone(current.data),target=next.lessons.find(x=>x.id===id);
+  if(hide)delete target.homeworkSolution;
+  else target.homeworkSolution={url:finalUrl,label:$('sol-label').value.trim()||'View homework solutions'};
+  const dataBlob=await manageApi(current.base+'/git/blobs','POST',{content:jsString(next),encoding:'utf-8'});tree.push({path:'data.js',mode:'100644',type:'blob',sha:dataBlob.sha});
+  const newTree=await manageApi(current.base+'/git/trees','POST',{base_tree:head.tree.sha,tree});
+  const commit=await manageApi(current.base+'/git/commits','POST',{message:(hide?'Hide':'Release')+' homework solutions: '+lesson.title,tree:newTree.sha,parents:[current.sha]});
+  await manageApi(current.base+current.refPath.replace('/git/ref/','/git/refs/'),'PATCH',{sha:commit.sha,force:false});
+  status.textContent=hide?'✓ Solutions link hidden. Previously uploaded PDFs are still public.':'✓ Solutions released to students. GitHub Pages may take a moment to update.';
+  $('sol-file').value='';$('sol-url').value='';$('gh-token').value='';
+ }catch(err){status.textContent='Update not confirmed: '+err.message+' Check GitHub before retrying.';}finally{btn.disabled=false;$('sol-hide').disabled=false;}
+}
+$('sol-release').addEventListener('click',()=>solPublish(false));
+$('sol-hide').addEventListener('click',()=>solPublish(true));
 </script></body></html>
