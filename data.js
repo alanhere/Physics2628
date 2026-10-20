@@ -5,6 +5,27 @@ window.HUB_DATA = {
   "teacherNote": "Sample content for demonstration. Your teacher will publish real lesson updates here.",
   "lessons": [
     {
+      "id": "lesson-2026-10-20-the-eye",
+      "date": "2026-10-20",
+      "topic": "Waves and Light",
+      "title": "The eye",
+      "summary": "Eye was presented and the different parts were named.\nHow short sight manifests itself and the lens to correct this.\nHow long sight manifests itself and the lens to correct this.\nHomework was to do the ray diagrams from the eye.",
+      "intentions": [
+        "Understand how the eye forms an image.",
+        "Undestand Short sightedness and longsightedness",
+        "The types of lens to resolve short sight and long sight"
+      ],
+      "activities": [],
+      "homework": "From the handout, Draw the ray diagram for short and long sight and the then draw it with the correct lenses.",
+      "due": "2026-10-23",
+      "additionalInstructions": "",
+      "resources": [
+        "lesson-2026-10-20-the-eye-resource-1",
+        "lesson-2026-10-20-the-eye-resource-2"
+      ],
+      "example": false
+    },
+    {
       "id": "lesson-2026-10-20-graphing-1-u-versus-1-v",
       "date": "2026-10-20",
       "topic": "Waves and Light",
@@ -555,6 +576,22 @@ window.HUB_DATA = {
       "type": "File",
       "description": "Attached to Graphing 1/u versus 1/v",
       "url": "uploads/lesson-2026-10-20-graphing-1-u-versus-1-v-Lens-example-questions.pdf"
+    },
+    {
+      "id": "lesson-2026-10-20-the-eye-resource-1",
+      "title": "eye handout.pdf",
+      "topic": "Waves and Light",
+      "type": "File",
+      "description": "Attached to The eye",
+      "url": "uploads/lesson-2026-10-20-the-eye-eye-handout.pdf"
+    },
+    {
+      "id": "lesson-2026-10-20-the-eye-resource-2",
+      "title": "the eye.pptx",
+      "topic": "Waves and Light",
+      "type": "File",
+      "description": "Attached to The eye",
+      "url": "uploads/lesson-2026-10-20-the-eye-the-eye.pptx"
     }
   ],
   "skills": [
