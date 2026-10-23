@@ -76,7 +76,7 @@
 <p><small>Important: Hiding removes the link from the site, but does not remove an already uploaded public PDF from GitHub. Previously shared URLs can still work. Do not release confidential material to a public repository.</small></p>
 </section>
 <section class="editor-panel" style="margin-top:22px" aria-labelledby="standalone-heading">
-<h2 id="standalone-heading">Manage standalone resources</h2><p>Add a PDF, YouTube video, PhET simulation or other link without creating a lesson. Resources are published directly to GitHub.</p>
+<h2 id="standalone-heading">Manage all resources</h2><p>Load every resource from GitHub, including original sample resources and resources attached to lessons. Add, edit or remove resource listings without creating a lesson. Resources referenced by lessons are protected from accidental deletion.</p>
 <form id="standalone-form">
 <div class="editor-grid" style="margin-top:0">
 <div>
@@ -91,10 +91,10 @@
 <div class="editor-actions"><button type="submit" id="sr-save">Publish resource</button><button type="button" id="sr-clear" class="secondary">Clear / cancel edit</button></div>
 <p id="sr-status" class="status" role="status" aria-live="polite"></p>
 </div></div></form>
-<h3>Published standalone resources</h3><p>Use your GitHub settings and token in the publishing panel above. Select Load to see the latest resources and edit or delete them.</p>
-<div class="editor-actions"><button type="button" id="sr-load">↻ Load published resources</button></div>
+<h3>All published resources</h3><p>Use your GitHub settings and token in the publishing panel above. Select Load to see all resources, including the original examples. Deleting a listing does not delete an uploaded file. Resources linked to lessons must be unlinked from those lessons first.</p>
+<div class="editor-actions"><button type="button" id="sr-load">↻ Load all resources</button></div>
 <div class="field"><label for="sr-filter">Find a resource</label><input id="sr-filter" placeholder="Search title, topic or type"></div>
-<div id="sr-list" aria-live="polite">Select “Load published resources” to begin.</div>
+<div id="sr-list" aria-live="polite">Select “Load all resources” to begin.</div>
 </section>
 </main>
 <script src="data.js"></script><script>
@@ -308,22 +308,22 @@ async function deleteManagedLesson(lesson){
 // Standalone resource management uses the same authenticated GitHub API and non-force branch updates.
 let srEditing=null,srSnapshot=null;
 const srFields=()=>({title:$('sr-title').value.trim(),description:$('sr-description').value.trim(),topic:$('sr-topic').value.trim(),placement:$('sr-placement').value,type:$('sr-type').value});
-const srTypeChange=()=>{const file=$('sr-type').value==='File';$('sr-file-wrap').hidden=!file;$('sr-url-wrap').hidden=file;};
+const srTypeChange=()=>{const file=$('sr-type').value==='File'||(srEditing&&$('sr-type').value===srEditing.type&&/^(uploads\/|\.\/uploads\/)/.test(srEditing.url||''));$('sr-file-wrap').hidden=!file;$('sr-url-wrap').hidden=file;};
 $('sr-type').addEventListener('change',srTypeChange);srTypeChange();
 const srTopics=()=>{$('sr-topic-list').replaceChildren(...data.topics.map(t=>{const o=document.createElement('option');o.value=t.name;return o;}));};srTopics();
 function srClear(){srEditing=null;$('standalone-form').reset();$('sr-file').value='';srTypeChange();$('sr-save').textContent='Publish resource';$('sr-status').textContent='';}
 $('sr-clear').addEventListener('click',srClear);
-function srRender(){const host=$('sr-list');host.replaceChildren();if(!srSnapshot){host.textContent='Select “Load published resources” to begin.';return;}
- const term=$('sr-filter').value.trim().toLowerCase();const list=srSnapshot.data.resources.filter(r=>r.standalone===true&&[r.title,r.topic,r.type,r.description].join(' ').toLowerCase().includes(term));
- if(!list.length){host.textContent='No matching standalone resources.';return;}
+function srRender(){const host=$('sr-list');host.replaceChildren();if(!srSnapshot){host.textContent='Select “Load all resources” to begin.';return;}
+ const term=$('sr-filter').value.trim().toLowerCase();const list=srSnapshot.data.resources.filter(r=>[r.title,r.topic,r.type,r.description,r.id].join(' ').toLowerCase().includes(term));
+ if(!list.length){host.textContent='No matching resources.';return;}
  for(const r of list){const row=document.createElement('div');row.style.cssText='border-bottom:1px solid #b8cce0;padding:12px 0;display:flex;gap:12px;align-items:center;flex-wrap:wrap';
- const info=document.createElement('div');info.style.flex='1 1 280px';const name=document.createElement('strong');name.textContent=r.title;const detail=document.createElement('small');detail.style.display='block';detail.textContent=[r.topic,r.type,r.placement||'resources'].join(' · ');info.append(name,detail);
- const edit=document.createElement('button');edit.type='button';edit.className='secondary';edit.textContent='Edit';edit.addEventListener('click',()=>{srEditing=structuredClone(r);$('sr-title').value=r.title||'';$('sr-description').value=r.description||'';$('sr-topic').value=r.topic||'';$('sr-placement').value=r.placement||'resources';$('sr-type').value=r.type||'Link';$('sr-url').value=/^https?:/.test(r.url||'')?r.url:'';srTypeChange();$('sr-save').textContent='Save resource changes';$('sr-status').textContent='Editing '+r.title+'. For uploaded files, leave the file picker empty to keep the existing file.';$('standalone-heading').scrollIntoView({behavior:'smooth'});});
- const del=document.createElement('button');del.type='button';del.className='secondary';del.textContent='Delete';del.addEventListener('click',()=>srDelete(r));row.append(info,edit,del);host.append(row);
+ const info=document.createElement('div');info.style.flex='1 1 280px';const name=document.createElement('strong');name.textContent=r.title;const detail=document.createElement('small');detail.style.display='block';const usedBy=srSnapshot.data.lessons.filter(l=>(l.resources||[]).includes(r.id));detail.textContent=[r.topic||'No topic',r.type||'Link',r.placement||'resources',r.standalone===true?'Added in editor':'Original / lesson resource',usedBy.length?('Used in '+usedBy.length+' lesson(s)'):'Not linked to lessons'].join(' · ');info.append(name,detail);
+ const edit=document.createElement('button');edit.type='button';edit.className='secondary';edit.textContent='Edit';edit.addEventListener('click',()=>{srEditing=structuredClone(r);$('sr-title').value=r.title||'';$('sr-description').value=r.description||'';$('sr-topic').value=r.topic||'';$('sr-placement').value=r.placement||'resources';const types=$('sr-type');if(r.type&&!Array.from(types.options).some(o=>o.value===r.type)){const option=document.createElement('option');option.value=r.type;option.textContent=r.type+' (original type)';types.append(option);}types.value=r.type||'Link';$('sr-url').value=/^https?:/.test(r.url||'')?r.url:'';srTypeChange();$('sr-save').textContent='Save resource changes';$('sr-status').textContent='Editing '+r.title+'. For uploaded files, leave the file picker empty to keep the existing file.';$('standalone-heading').scrollIntoView({behavior:'smooth'});});
+ const del=document.createElement('button');del.type='button';del.className='secondary';del.textContent='Delete';del.addEventListener('click',()=>srDelete(r));if(usedBy.length){del.disabled=true;del.title='Linked to: '+usedBy.map(l=>l.title).join(', ');const note=document.createElement('small');note.textContent='Unlink from lesson first';note.style.display='block';info.append(note);}row.append(info,edit,del);host.append(row);
  }
 }
 $('sr-filter').addEventListener('input',srRender);
-async function srLoad(){srSnapshot=await fetchManaged();srRender();$('sr-status').textContent=srSnapshot.data.resources.filter(r=>r.standalone===true).length+' standalone resources loaded.';}
+async function srLoad(){srSnapshot=await fetchManaged();srRender();$('sr-status').textContent=srSnapshot.data.resources.length+' resources loaded (including original samples).';}
 $('sr-load').addEventListener('click',async()=>{const btn=$('sr-load');btn.disabled=true;$('sr-status').textContent='Loading resources from GitHub…';try{await srLoad();}catch(e){$('sr-status').textContent='Could not load resources: '+e.message;}finally{btn.disabled=false;}});
 async function srCommit(transform,message,file){
  const current=await fetchManaged();const next=transform(current.data);const head=await manageApi(current.base+'/git/commits/'+current.sha);const entries=[];
@@ -337,20 +337,20 @@ async function srCommit(transform,message,file){
 }
 $('standalone-form').addEventListener('submit',async e=>{e.preventDefault();if(!$('standalone-form').reportValidity())return;
  const v=srFields(),file=$('sr-file').files[0]||null,link=$('sr-url').value.trim();if(!v.title||!v.topic)return;
- if(v.type==='File'&&!file&&!srEditing){$('sr-status').textContent='Choose a file to upload.';return;}
+ if($('sr-file-wrap').hidden===false&&!file&&!srEditing){$('sr-status').textContent='Choose a file to upload.';return;}
  if(file&&file.size>20*1024*1024){$('sr-status').textContent='Files must be 20 MB or smaller.';return;}
- if(v.type!=='File'){try{const u=new URL(link);if(!['https:','http:'].includes(u.protocol))throw Error();}catch{$('sr-status').textContent='Enter a complete https:// website URL.';return;}}
- if(srEditing&&v.type==='File'&&!file&&!srEditing.url.startsWith('uploads/')){$('sr-status').textContent='Choose a file when switching this resource to an uploaded file.';return;}
+ if($('sr-file-wrap').hidden){try{const u=new URL(link);if(!['https:','http:'].includes(u.protocol))throw Error();}catch{$('sr-status').textContent='Enter a complete https:// website URL.';return;}}
+ if(srEditing&&!$('sr-file-wrap').hidden&&!file&&!/^(uploads\/|\.\/uploads\/)/.test(srEditing.url||'')){$('sr-status').textContent='Choose a file when switching this resource to an uploaded file.';return;}
  const btn=$('sr-save');btn.disabled=true;$('sr-status').textContent='Checking latest GitHub data and preparing resource…';
- try{const id=srEditing?srEditing.id:'standalone-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8);const filename=file?'resource-'+id+'-'+safeName(file.name):null;const url=v.type==='File'?(filename?'uploads/'+filename:srEditing.url):link;
+ try{const id=srEditing?srEditing.id:'standalone-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8);const filename=file?'resource-'+id+'-'+safeName(file.name):null;const url=!$('sr-file-wrap').hidden?(filename?'uploads/'+filename:srEditing.url):link;
  await srCommit(latest=>{const existing=latest.resources.find(r=>r.id===id);if(srEditing&&JSON.stringify(existing)!==JSON.stringify(srEditing))throw new Error('This resource has changed on GitHub. Reload before editing.');if(!srEditing&&existing)throw new Error('Resource ID already exists. Retry.');
- const resource={...(existing||{}),id,title:v.title,description:v.description,topic:v.topic,type:v.type,url,placement:v.placement,standalone:true};return {...latest,_uploadPath:filename?'uploads/'+filename:undefined,topics:latest.topics.some(t=>t.name.toLowerCase()===v.topic.toLowerCase())?latest.topics:[...latest.topics,{name:v.topic,icon:'◉',color:'sky',description:'Resources for '+v.topic+'.',keyIdeas:[]}],resources:[...latest.resources.filter(r=>r.id!==id),resource]};},(srEditing?'Update':'Add')+' standalone physics resource: '+v.title,file);
+ const resource={...(existing||{}),id,title:v.title,description:v.description,topic:v.topic,type:v.type,url,placement:v.placement,standalone:existing?existing.standalone===true:true};return {...latest,_uploadPath:filename?'uploads/'+filename:undefined,topics:latest.topics.some(t=>t.name.toLowerCase()===v.topic.toLowerCase())?latest.topics:[...latest.topics,{name:v.topic,icon:'◉',color:'sky',description:'Resources for '+v.topic+'.',keyIdeas:[]}],resources:[...latest.resources.filter(r=>r.id!==id),resource]};},(srEditing?'Update':'Add')+' standalone physics resource: '+v.title,file);
  srClear();$('sr-status').textContent='✓ Resource published successfully. It will appear after GitHub Pages updates. Uploaded files are kept if you later delete the listing.';
  }catch(err){$('sr-status').textContent='Resource not confirmed published: '+err.message+' Check GitHub before retrying.';}finally{btn.disabled=false;}
 });
 async function srDelete(r){if(!confirm('Delete the resource listing “'+r.title+'”? Uploaded files will remain in GitHub.'))return;if(prompt('Type DELETE to confirm removal:')!=='DELETE')return;
  $('sr-status').textContent='Checking GitHub before deletion…';try{await srCommit(latest=>{const existing=latest.resources.find(x=>x.id===r.id);if(JSON.stringify(existing)!==JSON.stringify(r))throw new Error('This resource changed on GitHub. Reload the list before deleting.');
- if(latest.lessons.some(l=>(l.resources||[]).includes(r.id)))throw new Error('This resource is linked to a lesson. Remove it from that lesson first.');return {...latest,resources:latest.resources.filter(x=>x.id!==r.id)};},'Remove standalone physics resource: '+r.title,null);if(srEditing?.id===r.id)srClear();$('sr-status').textContent='✓ Resource listing removed. Uploaded file retained.';}catch(err){$('sr-status').textContent='Deletion not confirmed: '+err.message;}}
+ if(latest.lessons.some(l=>(l.resources||[]).includes(r.id)))throw new Error('This resource is linked to a lesson. Remove it from that lesson first.');return {...latest,resources:latest.resources.filter(x=>x.id!==r.id)};},'Remove physics resource: '+r.title,null);if(srEditing?.id===r.id)srClear();$('sr-status').textContent='✓ Resource listing removed. Uploaded file retained.';}catch(err){$('sr-status').textContent='Deletion not confirmed: '+err.message;}}
 
 $('publish').addEventListener('click',publishLesson);
 $('copy').addEventListener('click',async()=>{
