@@ -332,14 +332,6 @@ window.HUB_DATA = {
   ],
   "resources": [
     {
-      "id": "motion-notes",
-      "title": "Motion essentials — sample notes",
-      "topic": "Mechanics",
-      "type": "Notes",
-      "description": "Definitions, formulas and a worked example for speed and acceleration.",
-      "url": "resources/motion-essentials.html"
-    },
-    {
       "id": "acceleration-video",
       "title": "Acceleration explainer (external)",
       "topic": "Mechanics",
