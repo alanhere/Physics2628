@@ -5,6 +5,27 @@ window.HUB_DATA = {
   "teacherNote": "Sample content for demonstration. Your teacher will publish real lesson updates here.",
   "lessons": [
     {
+      "id": "lesson-2026-11-02-motion",
+      "date": "2026-11-02",
+      "topic": "Mechanics",
+      "title": "Motion",
+      "summary": "Distance, speed, displacement, Scalar versus Vector and Velocity as a formula.",
+      "intentions": [
+        "Distinguish distance from displacement; calculate average speed."
+      ],
+      "activities": [
+        "Hotwheels activity speed ramp"
+      ],
+      "homework": "Page 9 activity book. Questions 1 to 5.\nb) Complete the hotwheels activity questions and graph on the worksheet.",
+      "due": "2026-11-03",
+      "additionalInstructions": "",
+      "resources": [
+        "lesson-2026-11-02-motion-resource-1",
+        "lesson-2026-11-02-motion-resource-2"
+      ],
+      "example": false
+    },
+    {
       "id": "lesson-2026-10-20-the-eye",
       "date": "2026-10-20",
       "topic": "Waves and Light",
@@ -584,6 +605,22 @@ window.HUB_DATA = {
       "type": "File",
       "description": "Attached to The eye",
       "url": "uploads/lesson-2026-10-20-the-eye-the-eye.pptx"
+    },
+    {
+      "id": "lesson-2026-11-02-motion-resource-1",
+      "title": "Chapter 3_lesson1.pptx",
+      "topic": "Mechanics",
+      "type": "File",
+      "description": "Attached to Motion",
+      "url": "uploads/lesson-2026-11-02-motion-Chapter-3_lesson1.pptx"
+    },
+    {
+      "id": "lesson-2026-11-02-motion-resource-2",
+      "title": "hot wheels velocity.pdf",
+      "topic": "Mechanics",
+      "type": "File",
+      "description": "Attached to Motion",
+      "url": "uploads/lesson-2026-11-02-motion-hot-wheels-velocity.pdf"
     }
   ],
   "skills": [
