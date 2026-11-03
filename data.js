@@ -5,6 +5,31 @@ window.HUB_DATA = {
   "teacherNote": "Sample content for demonstration. Your teacher will publish real lesson updates here.",
   "lessons": [
     {
+      "id": "lesson-2026-11-03-velocity-and-an-investigation",
+      "date": "2026-11-03",
+      "topic": "Mechanics",
+      "title": "Velocity and an Investigation",
+      "summary": "Velocity Lesson.\nToday we looked at velocity and performed two methods of investigating constant motion in a straight line.\n1)Method 1. Ticker tape\n2) Method 2; photogate",
+      "intentions": [
+        "Definition of Velocity.",
+        "Calculate velocity and speed independently",
+        "Investigate the constant motion of a body"
+      ],
+      "activities": [
+        "Each team each measured the velocity of a body in constant motion using the ticker tape method and photo gate method."
+      ],
+      "homework": ") You will write up the photogate investigation(method2)  for Friday in your experimental copy.\nb) You will use the 10 step method in writing up the experiment and use the PEER method to write the conclusion.\nc) Do the graph question on page 14 in the activity book.\nd) for those who did not complete the worksheet on hotwheels, it needs to be done for Friday.\ne) I will collect experimental copy on Friday.",
+      "due": "2026-11-06",
+      "additionalInstructions": "For those missing here's a video of the experiment to be written up.\nhttps://www.youtube.com/watch?v=xpc1zohJGZw\n\nAll resources are in ONENOTE",
+      "resources": [
+        "lesson-2026-11-03-velocity-and-an-investigation-resource-1",
+        "lesson-2026-11-03-velocity-and-an-investigation-resource-2",
+        "lesson-2026-11-03-velocity-and-an-investigation-resource-3",
+        "lesson-2026-11-03-velocity-and-an-investigation-resource-4"
+      ],
+      "example": false
+    },
+    {
       "id": "lesson-2026-11-02-motion",
       "date": "2026-11-02",
       "topic": "Mechanics",
@@ -621,6 +646,38 @@ window.HUB_DATA = {
       "type": "File",
       "description": "Attached to Motion",
       "url": "uploads/lesson-2026-11-02-motion-hot-wheels-velocity.pdf"
+    },
+    {
+      "id": "lesson-2026-11-03-velocity-and-an-investigation-resource-1",
+      "title": "activity book Displacement and Velocity Answers.pdf",
+      "topic": "Mechanics",
+      "type": "File",
+      "description": "Attached to Velocity and an Investigation",
+      "url": "uploads/lesson-2026-11-03-velocity-and-an-investigation-activity-book-Displacement-and-Velocity-Answers.pdf"
+    },
+    {
+      "id": "lesson-2026-11-03-velocity-and-an-investigation-resource-2",
+      "title": "Invesitgation- constant motion.docx",
+      "topic": "Mechanics",
+      "type": "File",
+      "description": "Attached to Velocity and an Investigation",
+      "url": "uploads/lesson-2026-11-03-velocity-and-an-investigation-Invesitgation-constant-motion.docx"
+    },
+    {
+      "id": "lesson-2026-11-03-velocity-and-an-investigation-resource-3",
+      "title": "velocity and acceleration.pptx",
+      "topic": "Mechanics",
+      "type": "File",
+      "description": "Attached to Velocity and an Investigation",
+      "url": "uploads/lesson-2026-11-03-velocity-and-an-investigation-velocity-and-acceleration.pptx"
+    },
+    {
+      "id": "lesson-2026-11-03-velocity-and-an-investigation-resource-4",
+      "title": "VIDEO FOR TICKER TAPE",
+      "topic": "Mechanics",
+      "type": "Link",
+      "description": "Attached to Velocity and an Investigation",
+      "url": "https://library.folens.ie/content/RealWorldPhysics/2ndEdition/resources/Video/Experiment%205.1.mp4"
     }
   ],
   "skills": [
