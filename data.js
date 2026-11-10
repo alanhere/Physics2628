@@ -42,6 +42,23 @@ window.HUB_DATA = {
       "example": false
     },
     {
+      "id": "lesson-2026-11-06-acceleration",
+      "date": "2026-11-06",
+      "topic": "Mechanics",
+      "title": "Acceleration",
+      "summary": "Today we looked at acceleration. Defintions and the formula to calculate it,",
+      "intentions": [],
+      "activities": [],
+      "homework": "1) Do questions 1-6 page 48 in the textbook. Ignore the portion of the question to sketch a graph.\n2) I've sent back the midterm test to all. Please go through it and compare with the solutions and exemplate answers in the handout today.",
+      "due": "2026-11-09",
+      "additionalInstructions": "",
+      "resources": [
+        "lesson-2026-11-06-acceleration-resource-1",
+        "lesson-2026-11-06-acceleration-resource-2"
+      ],
+      "example": false
+    },
+    {
       "id": "lesson-2026-11-03-velocity-and-an-investigation",
       "date": "2026-11-03",
       "topic": "Mechanics",
@@ -771,6 +788,22 @@ window.HUB_DATA = {
       "type": "Video",
       "description": "Attached to Equations of Motion (part 1)",
       "url": "https://youtu.be/QFNTmY6euNM?si=xSf9z6smM16xkOSq"
+    },
+    {
+      "id": "lesson-2026-11-06-acceleration-resource-1",
+      "title": "acceleration lessoin.pptx",
+      "topic": "Mechanics",
+      "type": "File",
+      "description": "Attached to Acceleration",
+      "url": "uploads/lesson-2026-11-06-acceleration-acceleration-lessoin.pptx"
+    },
+    {
+      "id": "lesson-2026-11-06-acceleration-resource-2",
+      "title": "Midterm Refraction and Lens Test  Solutions.pdf",
+      "topic": "Mechanics",
+      "type": "File",
+      "description": "Attached to Acceleration",
+      "url": "uploads/lesson-2026-11-06-acceleration-Midterm-Refraction-and-Lens-Test-Solutions.pdf"
     }
   ],
   "skills": [
