@@ -24,6 +24,24 @@ window.HUB_DATA = {
       "example": false
     },
     {
+      "id": "lesson-2026-11-09-equations-of-motion-part-1",
+      "date": "2026-11-09",
+      "topic": "Mechanics",
+      "title": "Equations of Motion (part 1)",
+      "summary": "Today we started to look at the equations of motion and we derived the first 2 equations and used them in typical problems.",
+      "intentions": [],
+      "activities": [],
+      "homework": ") Complete the section A and Section B questions in the handout.\n2) Complete questions 7 8 and 9 in the activity book. page 12.",
+      "due": "2026-11-10",
+      "additionalInstructions": "",
+      "resources": [
+        "lesson-2026-11-09-equations-of-motion-part-1-resource-1",
+        "lesson-2026-11-09-equations-of-motion-part-1-resource-2",
+        "lesson-2026-11-09-equations-of-motion-part-1-resource-3"
+      ],
+      "example": false
+    },
+    {
       "id": "lesson-2026-11-03-velocity-and-an-investigation",
       "date": "2026-11-03",
       "topic": "Mechanics",
@@ -728,6 +746,30 @@ window.HUB_DATA = {
       "topic": "Mechanics",
       "type": "Video",
       "description": "Attached to Equations of Motion.",
+      "url": "https://youtu.be/QFNTmY6euNM?si=xSf9z6smM16xkOSq"
+    },
+    {
+      "id": "lesson-2026-11-09-equations-of-motion-part-1-resource-1",
+      "title": "20261109_1407.pdf",
+      "topic": "Mechanics",
+      "type": "File",
+      "description": "Attached to Equations of Motion (part 1)",
+      "url": "uploads/lesson-2026-11-09-equations-of-motion-part-1-20261109_1407.pdf"
+    },
+    {
+      "id": "lesson-2026-11-09-equations-of-motion-part-1-resource-2",
+      "title": "suvat equations.pptx",
+      "topic": "Mechanics",
+      "type": "File",
+      "description": "Attached to Equations of Motion (part 1)",
+      "url": "uploads/lesson-2026-11-09-equations-of-motion-part-1-suvat-equations.pptx"
+    },
+    {
+      "id": "lesson-2026-11-09-equations-of-motion-part-1-resource-3",
+      "title": "How to use SUVAT equations",
+      "topic": "Mechanics",
+      "type": "Video",
+      "description": "Attached to Equations of Motion (part 1)",
       "url": "https://youtu.be/QFNTmY6euNM?si=xSf9z6smM16xkOSq"
     }
   ],
