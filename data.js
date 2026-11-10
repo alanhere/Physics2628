@@ -5,6 +5,25 @@ window.HUB_DATA = {
   "teacherNote": "Sample content for demonstration. Your teacher will publish real lesson updates here.",
   "lessons": [
     {
+      "id": "lesson-2026-11-10-equations-of-motion",
+      "date": "2026-11-10",
+      "topic": "Mechanics",
+      "title": "Equations of Motion.",
+      "summary": "Derived the 3rd equation of motion.\nUtilised the equations of motion in word questions.\nrevisited  on how to use PEER in writing a conclusion and discussed the Exemplar that used the investigation of velcoity using photogates.",
+      "intentions": [],
+      "activities": [],
+      "homework": "Complete the questions 1 to 12 in section c of the SUVAT word questions. You will not be able to do Q10, so leave it out until Friday when we cover distance time graphs.",
+      "due": "2026-11-13",
+      "additionalInstructions": "",
+      "resources": [
+        "lesson-2026-11-10-equations-of-motion-resource-1",
+        "lesson-2026-11-10-equations-of-motion-resource-2",
+        "lesson-2026-11-10-equations-of-motion-resource-3",
+        "lesson-2026-11-10-equations-of-motion-resource-4"
+      ],
+      "example": false
+    },
+    {
       "id": "lesson-2026-11-03-velocity-and-an-investigation",
       "date": "2026-11-03",
       "topic": "Mechanics",
@@ -678,6 +697,38 @@ window.HUB_DATA = {
       "type": "Link",
       "description": "Attached to Velocity and an Investigation",
       "url": "https://library.folens.ie/content/RealWorldPhysics/2ndEdition/resources/Video/Experiment%205.1.mp4"
+    },
+    {
+      "id": "lesson-2026-11-10-equations-of-motion-resource-1",
+      "title": "suvat equations.pptx",
+      "topic": "Mechanics",
+      "type": "File",
+      "description": "Attached to Equations of Motion.",
+      "url": "uploads/lesson-2026-11-10-equations-of-motion-suvat-equations.pptx"
+    },
+    {
+      "id": "lesson-2026-11-10-equations-of-motion-resource-2",
+      "title": "Exemplar PEER Conclusion for linear motion.pdf",
+      "topic": "Mechanics",
+      "type": "File",
+      "description": "Attached to Equations of Motion.",
+      "url": "uploads/lesson-2026-11-10-equations-of-motion-Exemplar-PEER-Conclusion-for-linear-motion.pdf"
+    },
+    {
+      "id": "lesson-2026-11-10-equations-of-motion-resource-3",
+      "title": "SUVAT-equations.pdf",
+      "topic": "Mechanics",
+      "type": "File",
+      "description": "Attached to Equations of Motion.",
+      "url": "uploads/lesson-2026-11-10-equations-of-motion-SUVAT-equations.pdf"
+    },
+    {
+      "id": "lesson-2026-11-10-equations-of-motion-resource-4",
+      "title": "Using the Suvat Equations",
+      "topic": "Mechanics",
+      "type": "Video",
+      "description": "Attached to Equations of Motion.",
+      "url": "https://youtu.be/QFNTmY6euNM?si=xSf9z6smM16xkOSq"
     }
   ],
   "skills": [
