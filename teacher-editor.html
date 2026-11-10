@@ -23,7 +23,7 @@
 </style></head><body>
 <header class="topbar"><a class="brand" href="index.html#home"><span class="logo">⚛</span><span><strong>Physics Learning Hub</strong><small>Teacher lesson editor</small></span></a><nav aria-label="Editor navigation"><a href="index.html#log">← Student website</a></nav></header>
 <main class="editor-wrap">
-<section class="editor-head"><h1>✏️ Teacher Lesson Editor</h1><p>Fill in your lesson, attach resources and publish everything to GitHub in one click.</p></section>
+<section class="editor-head"><h1>✏️ Teacher Editor</h1><p>Add a short classwork note, homework and any files. Publish directly to GitHub.</p></section>
 <div class="notice-teacher"><strong>Important:</strong> The editor is publicly viewable, but publishing requires your GitHub authorisation. For security, use a fine-grained token with <strong>Contents: Read and write</strong> permission for this repository only. Your token stays in browser memory and is never saved. For best security, open this editor locally on your own computer, not on a shared device. Do not enter student personal data.</div>
 <div class="editor-grid">
 <section class="editor-panel" id="lesson-details-panel"><h2>Lesson details</h2><p id="edit-mode-notice" role="status" aria-live="polite" hidden style="background:#eaf2ff;border-left:4px solid #d3242b;padding:12px;font-weight:700"></p>
@@ -31,12 +31,12 @@
 <div class="field"><label for="date">Lesson date *</label><input id="date" type="date" required></div>
 <div class="field"><label for="topic">Topic *</label><select id="topic" required></select><div id="new-topic-wrap" hidden style="margin-top:10px"><label for="new-topic">New topic name *</label><input id="new-topic" type="text" maxlength="80" placeholder="e.g. Optics"></div><small>Select an existing topic or choose “+ Add a new topic”.</small></div>
 <div class="field"><label for="title">Lesson title *</label><input id="title" required placeholder="e.g. Newton's Second Law"></div>
-<div class="field"><label for="intentions">Learning intentions *</label><textarea id="intentions" required placeholder="One intention per line"></textarea><small>Write each intention on a separate line.</small></div>
-<div class="field"><label for="summary">What was covered *</label><textarea id="summary" required placeholder="A short overview of the lesson"></textarea></div>
-<div class="field"><label for="activities">Activities and examples</label><textarea id="activities" placeholder="One activity per line"></textarea></div>
-<div class="field"><label for="homework">Homework *</label><textarea id="homework" required placeholder="e.g. Complete questions 1–6"></textarea></div>
+<input type="hidden" id="intentions">
+<div class="field"><label for="summary">Classwork (optional)</label><textarea id="summary" placeholder="Brief note on what you did in class"></textarea></div>
+<input type="hidden" id="activities">
+<div class="field"><label for="homework">Homework (optional)</label><textarea id="homework" placeholder="e.g. Complete questions 1–6"></textarea></div>
 <div class="field"><label for="due">Homework due date</label><input id="due" type="date"><small>Leave blank if there is no fixed due date.</small></div>
-<div class="field"><label for="additional-instructions">Additional instructions (optional)</label><textarea id="additional-instructions" placeholder="e.g. If you missed the experiment, watch the demonstration video."></textarea><small>Only add this when students need guidance beyond the class log and linked resources.</small></div>
+<input type="hidden" id="additional-instructions">
 <div class="field"><label for="resources">Existing resources</label><select id="resources" multiple size="5"></select><small>Optional. Hold Ctrl (Windows) or Command (Mac) to select several.</small></div>
 <section class="attachment-section" aria-label="Add resources"><h3>📎 Attach resources</h3><p>Attach new files, images or links. They will also appear in the Resource Library.</p>
 <div class="field"><label for="file-upload">1. Add files (PDF, PowerPoint, Word, spreadsheets)</label><input id="file-upload" type="file" multiple accept=".pdf,.ppt,.pptx,.doc,.docx,.xls,.xlsx,.csv,.txt,.odt,.ods,.odp"/><small>Keep files reasonably small (under 10 MB recommended). Files are uploaded automatically when you publish.</small></div>
@@ -132,14 +132,14 @@ $('lesson-form').addEventListener('submit',e=>{
  if(due && due<date){$('status').textContent='The homework due date cannot be earlier than the lesson date.';return;}
  const topicName=v('topic')==='__new__'?v('new-topic'):v('topic');
  if(!topicName){$('status').textContent='Choose or enter a topic.';return;}
- generated={id:'lesson-'+date+'-'+(slug(title)||'entry'),date,topic:topicName,title,summary:v('summary'),intentions:lines(v('intentions')),activities:lines(v('activities')),homework:v('homework'),due,additionalInstructions:v('additional-instructions'),resources:[...$('resources').selectedOptions].map(x=>x.value),example:false};
+ generated={...(editingOriginal||{}),id:'lesson-'+date+'-'+(slug(title)||'entry'),date,topic:topicName,title,summary:v('summary'),intentions:editingOriginal?.intentions||[],activities:editingOriginal?.activities||[],homework:v('homework'),due,additionalInstructions:editingOriginal?.additionalInstructions||'',resources:[...$('resources').selectedOptions].map(x=>x.value),example:false};
  const replacement=data.lessons.some(l=>l.id===generated.id);
  if(editingOriginal)generated.id=editingOriginal.id;
  const newResources=attachments.map((a,i)=>({id:generated.id+'-resource-'+(i+1),title:a.title,topic:generated.topic,type:a.kind==='link'?(/youtu\.be|youtube\.com|vimeo\.com/i.test(a.url)?'Video':'Link'):a.kind==='image'?'Image':'File',description:'Attached to '+generated.title,url:a.kind==='link'?a.url:'uploads/'+a.filename}));
  generated.resources.push(...newResources.map(r=>r.id));
- updated={...data,topics:data.topics.some(t=>t.name.toLowerCase()===topicName.toLowerCase())?data.topics:[...data.topics,{name:topicName,icon:'◉',color:'sky',description:'Lessons and resources for '+topicName+'.',keyIdeas:[]}],lessons:[generated,...data.lessons.filter(l=>l.id!==generated.id)].sort((a,b)=>b.date.localeCompare(a.date)),resources:[...data.resources.filter(r=>!r.id.startsWith(generated.id+'-resource-')),...newResources]};
+ updated={...data,topics:data.topics.some(t=>t.name.toLowerCase()===topicName.toLowerCase())?data.topics:[...data.topics,{name:topicName,icon:'◉',color:'sky',description:'Lessons and resources for '+topicName+'.',keyIdeas:[]}],lessons:[generated,...data.lessons.filter(l=>l.id!==generated.id)].sort((a,b)=>b.date.localeCompare(a.date)),resources:[...data.resources.filter(r=>!newResources.some(n=>n.id===r.id)),...newResources]};
  const manifest=$('upload-manifest');const files=attachments.filter(a=>a.file);manifest.hidden=!files.length;manifest.replaceChildren();if(files.length){const strong=document.createElement('strong');strong.textContent='Files to upload to GitHub → uploads/';manifest.append(strong);const list=document.createElement('ul');files.forEach(a=>{const li=document.createElement('li');li.textContent=a.filename;list.append(li)});manifest.append(list);const note=document.createElement('p');note.textContent='These files upload automatically with Publish. Rename and upload them manually only if using the Download backup method.';manifest.append(note);}
- $('preview').innerHTML=`<small>${escape(date)} · ${escape(generated.topic)}</small><h3>${escape(title)}</h3><p>${escape(generated.summary)}</p><strong>Learning intentions</strong><ul>${generated.intentions.map(x=>`<li>${escape(x)}</li>`).join('')}</ul><strong>Homework</strong><p>${escape(generated.homework)}${due?' — Due '+escape(due):''}</p>${generated.additionalInstructions?`<strong>Additional instructions</strong><p>${escape(generated.additionalInstructions)}</p>`:""}`;
+ $('preview').innerHTML=`<small>${escape(date)} · ${escape(generated.topic)}</small><h3>${escape(title)}</h3><p>${escape(generated.summary)}</p><strong>Homework</strong><p>${escape(generated.homework)}${due?' — Due '+escape(due):''}</p>`;
  $('download').disabled=false;$('copy').disabled=false;$('publish').disabled=false;
  $('status').textContent=replacement?'Ready to publish: a lesson with this ID will be replaced.':'Ready to publish: review the preview, then select Publish.';
 });
