@@ -5,6 +5,24 @@ window.HUB_DATA = {
   "teacherNote": "Sample content for demonstration. Your teacher will publish real lesson updates here.",
   "lessons": [
     {
+      "id": "lesson-2026-11-13-graphs-distance-velocity-and-time",
+      "date": "2026-11-13",
+      "topic": "Mechanics",
+      "title": "Graphs- Distance Velocity and time",
+      "summary": "Determine the motion based on the shape of the graph.\nConstruct a distance time graph and dermine the velocity \nConstruct a velocity time graph and determine the acceleration and  Calcaule the distance for from the area of the graph.",
+      "intentions": [],
+      "activities": [],
+      "homework": "From the textbook, Page 48, do questions 1 to 6.",
+      "due": "2026-11-16",
+      "additionalInstructions": "",
+      "resources": [
+        "lesson-2026-11-13-graphs-distance-velocity-and-time-resource-1",
+        "lesson-2026-11-13-graphs-distance-velocity-and-time-resource-2",
+        "lesson-2026-11-13-graphs-distance-velocity-and-time-resource-3"
+      ],
+      "example": false
+    },
+    {
       "id": "lesson-2026-11-10-equations-of-motion",
       "date": "2026-11-10",
       "topic": "Mechanics",
@@ -804,6 +822,30 @@ window.HUB_DATA = {
       "type": "File",
       "description": "Attached to Acceleration",
       "url": "uploads/lesson-2026-11-06-acceleration-Midterm-Refraction-and-Lens-Test-Solutions.pdf"
+    },
+    {
+      "id": "lesson-2026-11-13-graphs-distance-velocity-and-time-resource-1",
+      "title": "distance time.pdf",
+      "topic": "Mechanics",
+      "type": "File",
+      "description": "Attached to Graphs- Distance Velocity and time",
+      "url": "uploads/lesson-2026-11-13-graphs-distance-velocity-and-time-distance-time.pdf"
+    },
+    {
+      "id": "lesson-2026-11-13-graphs-distance-velocity-and-time-resource-2",
+      "title": "Distance time graph",
+      "topic": "Mechanics",
+      "type": "Video",
+      "description": "Attached to Graphs- Distance Velocity and time",
+      "url": "https://www.youtube.com/watch?v=RM02SnuJ0MY"
+    },
+    {
+      "id": "lesson-2026-11-13-graphs-distance-velocity-and-time-resource-3",
+      "title": "velocity time graphs",
+      "topic": "Mechanics",
+      "type": "Video",
+      "description": "Attached to Graphs- Distance Velocity and time",
+      "url": "https://www.youtube.com/watch?v=VJefeYJL3uE"
     }
   ],
   "skills": [
