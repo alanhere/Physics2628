@@ -465,6 +465,13 @@ window.HUB_DATA = {
         "Uncertainty",
         "Experimental design"
       ]
+    },
+    {
+      "name": "waves and mechanics",
+      "icon": "◉",
+      "color": "sky",
+      "description": "Resources for waves and mechanics.",
+      "keyIdeas": []
     }
   ],
   "resources": [
@@ -889,6 +896,16 @@ window.HUB_DATA = {
       "type": "Link",
       "description": "Attached to Veritcal Motion.",
       "url": "https://digital.folens.ie/post-primary/programmes/RealWorldPhysics/2ndEd/resources/GuestView/Experiment%206.2.mp4"
+    },
+    {
+      "id": "standalone-mwtrjizj-3gmbv3",
+      "title": "Solutions to November Exam",
+      "description": "Solutions to the November 2026 5th year exam",
+      "topic": "waves and mechanics",
+      "type": "File",
+      "url": "uploads/resource-standalone-mwtrjizj-3gmbv3-5th-Year-Physics-November-2026-Solutions.pdf",
+      "placement": "resources",
+      "standalone": true
     }
   ],
   "skills": [
