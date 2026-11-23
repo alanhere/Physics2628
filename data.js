@@ -5,6 +5,25 @@ window.HUB_DATA = {
   "teacherNote": "Sample content for demonstration. Your teacher will publish real lesson updates here.",
   "lessons": [
     {
+      "id": "lesson-2026-11-23-veritcal-motion",
+      "date": "2026-11-23",
+      "topic": "Mechanics",
+      "title": "Veritcal Motion.",
+      "summary": "Today we looked at vertical motion and looked at object falling off and table and also objects being launched up before falling back down.",
+      "intentions": [],
+      "activities": [],
+      "homework": "Read Pages 53-58 in the book. Do questions 1 to 6 page 5.",
+      "due": "2026-11-24",
+      "additionalInstructions": "",
+      "resources": [
+        "graph-guide",
+        "lesson-2026-11-23-veritcal-motion-resource-1",
+        "lesson-2026-11-23-veritcal-motion-resource-2",
+        "lesson-2026-11-23-veritcal-motion-resource-3"
+      ],
+      "example": false
+    },
+    {
       "id": "lesson-2026-11-13-graphs-distance-velocity-and-time",
       "date": "2026-11-13",
       "topic": "Mechanics",
@@ -846,6 +865,30 @@ window.HUB_DATA = {
       "type": "Video",
       "description": "Attached to Graphs- Distance Velocity and time",
       "url": "https://www.youtube.com/watch?v=VJefeYJL3uE"
+    },
+    {
+      "id": "lesson-2026-11-23-veritcal-motion-resource-1",
+      "title": "Vertical Motion example question snotes.pdf",
+      "topic": "Mechanics",
+      "type": "File",
+      "description": "Attached to Veritcal Motion.",
+      "url": "uploads/lesson-2026-11-23-veritcal-motion-Vertical-Motion-example-question-snotes.pdf"
+    },
+    {
+      "id": "lesson-2026-11-23-veritcal-motion-resource-2",
+      "title": "Veritcal motion eqautions worked examples",
+      "topic": "Mechanics",
+      "type": "Video",
+      "description": "Attached to Veritcal Motion.",
+      "url": "https://www.youtube.com/watch?v=Wkh1szAoFmA"
+    },
+    {
+      "id": "lesson-2026-11-23-veritcal-motion-resource-3",
+      "title": "Method of performing free fall Investigation",
+      "topic": "Mechanics",
+      "type": "Link",
+      "description": "Attached to Veritcal Motion.",
+      "url": "https://digital.folens.ie/post-primary/programmes/RealWorldPhysics/2ndEd/resources/GuestView/Experiment%206.2.mp4"
     }
   ],
   "skills": [
